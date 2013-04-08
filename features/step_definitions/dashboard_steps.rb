@@ -7,5 +7,5 @@ When(/^I spend \$(\d+) of "(.*?)"$/) do |amount, category|
 end
 
 Then(/^I should see \$(\d+) for "(.*?)"$/) do |amount, category|
-  on(DashboardPage).balance(category).should eq amount
+  visit(DashboardPage).balance(category).should eq amount
 end
