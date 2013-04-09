@@ -1,1 +1,3 @@
-<div id=groc_balance>40</div>
+<% @balances.each_pair do |key, value| %>
+  <div id=<%=key%>_balance><%=value%></div>
+<% end %>
