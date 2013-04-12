@@ -1,7 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'cucumber'
-gem 'rspec'
-gem 'page-object'
-
-gem 'tmuxinator'
+# Specify your gem's dependencies in finances.gemspec
+gemspec
