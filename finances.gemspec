@@ -26,4 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "page-object"
   spec.add_development_dependency "teamocil"
+
+  spec.add_development_dependency "sequel"
+  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "database_cleaner"
 end
