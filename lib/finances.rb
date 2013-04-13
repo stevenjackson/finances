@@ -1,5 +1,5 @@
-require "finances/version"
+require "require_all"
+require_rel "finances"
 
 module Finances
-  # Your code goes here...
 end

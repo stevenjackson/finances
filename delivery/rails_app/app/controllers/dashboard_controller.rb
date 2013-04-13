@@ -1,5 +1,8 @@
+require 'finances'
+
 class DashboardController < ApplicationController
+  include Finances
   def home
-    @balances = { groc: 40 }
+    @balances = GetBalances.new.run
   end
 end

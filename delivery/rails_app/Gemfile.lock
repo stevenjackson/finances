@@ -1,3 +1,9 @@
+PATH
+  remote: ../../
+  specs:
+    finances (0.0.1)
+      require_all
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -79,6 +85,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    require_all (1.2.1)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -105,6 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  finances!
   jquery-rails
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
