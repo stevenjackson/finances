@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "page-object"
-  spec.add_development_dependency "tmuxinator"
+  spec.add_development_dependency "teamocil"
 end
