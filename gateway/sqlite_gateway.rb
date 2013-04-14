@@ -7,10 +7,14 @@ class SqliteGateway
   end
 
   def categories
-    [Category.new('groc', 40)]
+    @db[:categories].map do |r|
+      Category.new r[:name], r[:budget]
+    end
   end
 
   def debits
-    []
+    @db[:debits].map do |r|
+      Debit.new r[:category], r[:amount]
+    end
   end
 end

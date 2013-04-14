@@ -1,8 +1,9 @@
+require 'fig_newton'
 require 'sequel'
 
 class TestDatabase
   def initialize
-    @db = Sequel.connect('sqlite://test.db')
+    @db = Sequel.connect('sqlite://gateway/data/development.db')
     initialize_schemas
   end
 
@@ -13,7 +14,7 @@ class TestDatabase
         FixNum :budget
     end
 
-    @db.create_table? :transactions do
+    @db.create_table? :debits do
       primary_key :id
       String :category
       FixNum :amount
@@ -25,6 +26,6 @@ class TestDatabase
   end
 
   def debit_category(category, amount)
-    @db[:transactions].insert :category => category, :amount => amount
+    @db[:debits].insert :category => category, :amount => amount
   end
 end
