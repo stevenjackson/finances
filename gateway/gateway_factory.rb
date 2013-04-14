@@ -1,4 +1,5 @@
 require 'require_all'
+require 'fig_newton'
 require_rel '.'
 module GatewayFactory
   class << self

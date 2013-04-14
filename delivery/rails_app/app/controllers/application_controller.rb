@@ -1,4 +1,4 @@
-require_relative '../../../../gateway/gateway_factory'
+require 'gateway_factory'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 

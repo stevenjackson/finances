@@ -19,6 +19,4 @@ end
 gem 'jquery-rails'
 
 gem 'finances', :path => '../../'
-
-gem 'fig_newton'
-gem 'sequel'
+gem 'finances_data', :path => '../../gateway'
