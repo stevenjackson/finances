@@ -16,4 +16,10 @@ end
 group :development do
   gem "teamocil"
   gem "debugger"
+  gem "guard-rspec"
+  gem "guard-cucumber"
+  gem 'fuubar'
+  gem 'fuubar-cucumber'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'growl'
 end
