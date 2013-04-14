@@ -1,1 +1,3 @@
 require 'finances'
+
+include Finances

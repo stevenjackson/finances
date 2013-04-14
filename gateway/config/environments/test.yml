@@ -1,0 +1,4 @@
+default_datasource: sqlite
+
+sqlite:
+  url: 'sqlite://gateway/data/test.db'

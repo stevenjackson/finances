@@ -3,6 +3,6 @@ require 'finances'
 class DashboardController < ApplicationController
   include Finances
   def home
-    @balances = GetBalances.new.run
+    @balances = GetBalances.new(gateway).run
   end
 end

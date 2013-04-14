@@ -46,6 +46,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fig_newton (0.8)
+      yml_reader (>= 0.2)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -91,6 +93,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    sequel (3.46.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -106,15 +109,18 @@ GEM
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    yml_reader (0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  fig_newton
   finances!
   jquery-rails
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  sequel
   sqlite3
   uglifier (>= 1.0.3)
