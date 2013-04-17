@@ -19,6 +19,8 @@ group :development do
   gem "guard-rspec"
   gem "guard-cucumber"
   gem 'fuubar'
+  gem 'spork'
+  gem 'guard-spork'
   gem 'fuubar-cucumber'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'growl'
