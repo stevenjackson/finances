@@ -3,7 +3,7 @@ require 'sequel'
 
 class TestDatabase
   def initialize
-    @db = Sequel.connect('sqlite://gateway/data/test.db')
+    @db = Sequel.connect(DB_URI)
     initialize_schemas
   end
 
@@ -19,6 +19,11 @@ class TestDatabase
       String :category
       FixNum :amount
     end
+    
+    @db.create_table? :transactions do
+      primary_key :id
+      FixNum :amount
+    end
   end
 
   def insert_category(category, amount)
@@ -27,5 +32,9 @@ class TestDatabase
 
   def debit_category(category, amount)
     @db[:debits].insert :category => category, :amount => amount
+  end
+
+  def insert_transaction(amount)
+    @db[:transactions].insert :amount => amount
   end
 end
