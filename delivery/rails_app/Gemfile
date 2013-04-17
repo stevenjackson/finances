@@ -16,6 +16,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test do
+  gem 'shotgun'
+end
+
 gem 'jquery-rails'
 
 gem 'finances', :path => '../../'
