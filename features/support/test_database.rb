@@ -3,7 +3,7 @@ require 'sequel'
 
 class TestDatabase
   def initialize
-    @db = Sequel.connect('sqlite://gateway/data/development.db')
+    @db = Sequel.connect('sqlite://gateway/data/test.db')
     initialize_schemas
   end
 
