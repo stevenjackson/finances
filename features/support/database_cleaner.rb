@@ -2,7 +2,8 @@ require 'sequel'
 require 'database_cleaner'
 require 'database_cleaner/cucumber'
 
-DatabaseCleaner.strategy = :truncation
+DB_URI = 'sqlite://gateway/data/test.db'
+DatabaseCleaner[:sequel, {:connection => Sequel.connect(DB_URI)}].strategy = :truncation
 
 Before do
     DatabaseCleaner.start
