@@ -10,7 +10,7 @@ end
 guard 'spork', :rspec => false, :cucumber_env => { 'RAILS_ENV' => 'test' } do
 end
 
-guard 'cucumber', :cli => '--drb --format progress --no-profile', :notification => true, :all_after_pass => false do
+guard 'cucumber', :cli => '--drb --format progress --no-profile --tag @wip', :notification => true, :all_after_pass => false do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { "features" }
   watch(%r{^lib/.+\.rb$})                   { "features" }
