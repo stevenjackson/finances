@@ -1,4 +1,5 @@
 Feature:  Distribute transactions amongst categories
+  @wip
   Scenario:  Transactions can be assigned to a single category
     Given I have a category for "groc" with an amount of $100
     And I have a transaction for $35
