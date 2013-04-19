@@ -1,3 +1,10 @@
+<%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
+  <%= label_tag(:t, "Transaction 1 $35") %>
+  <%= text_field_tag(:category) %>
+  <%= submit_tag("Assign") %>
+<% end %>
+<!--
 <div>
   <div>Transaction 1 $35</div><input /><button type="submit">assign</button>
 </div>
+-->
