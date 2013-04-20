@@ -1,10 +1,18 @@
-<%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
-  <%= label_tag(:t, "Transaction 1 $35") %>
-  <%= text_field_tag(:category) %>
-  <%= submit_tag("Assign") %>
-<% end %>
-<!--
 <div>
-  <div>Transaction 1 $35</div><input /><button type="submit">assign</button>
+  <span>
+    <table id=unsorted_transactions>
+      <% @unsorted_transactions.each do |t| %>
+        <tr id=t<%= t[:id] %>>
+          <td> <%=t[:description] %></td><td> <%=t[:amount] %> </td>
+        </tr>
+      <% end %>
+    </table>
+  </span>
+  <span>
+    <%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
+      <%= text_field_tag(:category) %>
+      <%= submit_tag("Assign") %>
+    <% end %>
+  </span>
+
 </div>
--->

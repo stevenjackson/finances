@@ -13,7 +13,7 @@ class TransactionPage
   end
 
   def count
-    return transactions.rows.count
+    return transactions_element.rows
   end
 
 end

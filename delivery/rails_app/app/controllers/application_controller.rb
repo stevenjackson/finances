@@ -1,5 +1,7 @@
 require 'gateway_factory'
+require 'finances'
 class ApplicationController < ActionController::Base
+  include Finances
   protect_from_forgery
 
   helper_method :gateway

@@ -3,7 +3,7 @@ Given(/^I have a transaction for \$(\d+)$/) do |amount|
 end
 
 Then(/^I should see (\d+) outstanding transactions$/) do |count|
-  visit(TransactionPage).count.should == count
+  visit(TransactionPage).count.should == count.to_i
 end
 
 When(/^I assign the transaction to "(.*?)"$/) do |category|
