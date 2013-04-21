@@ -22,6 +22,7 @@ class TestDatabase
     
     @db.create_table? :transactions do
       primary_key :id
+      String :description
       FixNum :amount
     end
   end
@@ -35,6 +36,6 @@ class TestDatabase
   end
 
   def insert_transaction(amount)
-    @db[:transactions].insert :amount => amount
+    @db[:transactions].insert :description => "Trans", :amount => amount
   end
 end
