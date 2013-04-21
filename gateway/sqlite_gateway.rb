@@ -14,7 +14,7 @@ class SqliteGateway
 
   def debits
     @db[:debits].map do |r|
-      Debit.new r[:category], r[:amount]
+      Debit.new r[:transaction_id], r[:category], r[:amount]
     end
   end
 
