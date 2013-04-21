@@ -17,6 +17,6 @@ class TestGateway
   end
 
   def debits
-    [Debit.new('stuff', 10)]
+    [Debit.new(1, 'stuff', 10)]
   end
 end
