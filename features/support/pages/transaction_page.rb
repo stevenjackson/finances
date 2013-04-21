@@ -1,11 +1,11 @@
 class TransactionPage
   include PageObject
 
-  page_url "http://localhost:3000/transaction"
+  page_url "#{FigNewton.base_url}/transaction"
 
   table(:transactions)
   text_field(:first_category, :index => 0)
-  button(:assign, :text => 'assign')
+  button(:assign, :text => 'Assign')
 
   def assign_first_transaction_to(category)
     self.first_category = category

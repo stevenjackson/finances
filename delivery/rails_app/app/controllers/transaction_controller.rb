@@ -4,7 +4,8 @@ class TransactionController < ApplicationController
   end
   
   def assign
-    puts params[:category]
+    AssignTransaction.new(gateway).run(params)
+    index
     render 'index'
   end
 end

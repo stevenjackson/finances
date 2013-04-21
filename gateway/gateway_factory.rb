@@ -3,10 +3,8 @@ require 'fig_newton'
 require_rel '.'
 module GatewayFactory
   class << self
-
-
     def create(environment)
-      FigNewton.yml_directory = find_path 'config', 'environments'
+      FigNewton.yml_directory = find_path '..', 'config', 'environments'
       FigNewton.load "#{environment}.yml"
       ds = FigNewton.default_datasource
       self.send ds, FigNewton.send(ds).to_hash

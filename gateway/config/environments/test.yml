@@ -1,4 +1,0 @@
-default_datasource: sqlite
-
-sqlite:
-  file: 'test.db'

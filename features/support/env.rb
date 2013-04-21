@@ -11,5 +11,7 @@ end
 
 require 'rspec-expectations'
 require 'page-object'
+require 'fig_newton'
 
 World(PageObject::PageFactory)
+FigNewton.load "test.yml"

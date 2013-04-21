@@ -11,6 +11,8 @@
   <span>
     <%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
       <%= text_field_tag(:category) %>
+      <%= hidden_field_tag :transaction_id, 1 %>
+      <%= hidden_field_tag :amount, 35 %>
       <%= submit_tag("Assign") %>
     <% end %>
   </span>

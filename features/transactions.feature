@@ -9,7 +9,8 @@ Feature:  Distribute transactions amongst categories
     Given I have a category for "groc" with an amount of $100
     And I have a transaction for $35
     When I assign the transaction to "groc"
-    Then I should see $65 for "groc"
+    Then I should see 1 outstanding transaction
+    And I should see $65 for "groc"
 
   Scenario:  Transactions can be split
     Given I have a category for "groc" with an amount of $100
