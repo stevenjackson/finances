@@ -24,4 +24,8 @@ class SqliteGateway
       Transaction.new r[:id], r[:description], r[:amount]
     end
   end
+
+  def transaction_by_id(id)
+    @db[:transactions][id]
+  end
 end

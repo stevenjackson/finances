@@ -1,2 +1,2 @@
-Finances::Debit = Struct.new(:category, :amount) do
+Finances::Debit = Struct.new(:transaction_id, :category, :amount) do
 end
