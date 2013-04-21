@@ -5,7 +5,7 @@ describe GetBalances do
   let(:action) { GetBalances.new gateway  }
 
   it "calculates category balances" do
-    action.run[:stuff].should == 90
+    action.run[:stuff].should be 90
   end
 
 

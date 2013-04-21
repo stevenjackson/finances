@@ -1,8 +1,2 @@
-class Finances::Debit
-  attr_reader :category, :amount
-
-  def initialize(category, amount)
-    @category = category
-    @amount = amount
-  end
+Finances::Debit = Struct.new(:category, :amount) do
 end
