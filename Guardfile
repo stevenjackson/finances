@@ -19,6 +19,7 @@ group :tests, :halt_on_fail => true  do
     watch(%r{^features/.+$})                  { "features" }
     watch(%r{^lib/.+\.rb$})                   { "features" }
     watch(%r{^cucumber.yml$})                 { "features" }
-    watch(%r{^delivery/rails_app/.+rb$})    { "features" }
+    watch(%r{^delivery/rails_app/.+rb$})      { "features" }
+    watch(%r{^gateway/.+rb$})                 { "features" }
   end
 end
