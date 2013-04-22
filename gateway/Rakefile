@@ -1,0 +1,24 @@
+desc "Setup dev databases"
+task :db_bootstrap => %w[db_create db_migrate]
+
+task :db_create do
+ %w[test development].each do |env|
+  `touch #{db_dir}/#{env}.sqlite`
+ end
+end
+
+desc "Do migrations on all databases"
+task :db_migrate do
+  migrations_dir = find_path 'data', 'sequel_migrations'
+  Dir.glob("#{db_dir}/*.sqlite") do |item|
+    `sequel -m #{migrations_dir} sqlite://#{item}`
+  end
+end
+
+def db_dir
+  find_path 'data'
+end
+
+def find_path(*args)
+  File.join(File.expand_path(File.dirname(__FILE__)), *args)
+end

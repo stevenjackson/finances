@@ -2,4 +2,4 @@ base_url: http://localhost:3000
 default_datasource: sqlite
 
 sqlite:
-  file: 'development.db'
+  file: development.sqlite

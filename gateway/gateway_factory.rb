@@ -1,6 +1,6 @@
 require 'require_all'
 require 'fig_newton'
-require_rel '.'
+require_rel '*.rb'
 module GatewayFactory
   class << self
     def create(environment)
