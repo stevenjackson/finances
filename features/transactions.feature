@@ -4,12 +4,11 @@ Feature:  Distribute transactions amongst categories
     And I have a transaction for $35
     Then I should see 2 outstanding transactions
 
-  @wip
   Scenario:  Transactions can be assigned to a single category
     Given I have a category for "groc" with an amount of $100
     And I have a transaction for $35
     When I assign the transaction to "groc"
-    Then I should see 1 outstanding transaction
+    Then I should see 0 outstanding transactions
     And I should see $65 for "groc"
 
   Scenario:  Transactions can be split
