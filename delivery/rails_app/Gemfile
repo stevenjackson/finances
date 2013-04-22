@@ -18,6 +18,7 @@ end
 
 group :test do
   gem 'shotgun'
+  gem 'debugger'
 end
 
 gem 'jquery-rails'

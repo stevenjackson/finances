@@ -8,6 +8,7 @@ class TransactionPage
   button(:assign, :text => 'Assign')
 
   def assign_first_transaction_to(category)
+    transactions_element.first.click
     self.first_category = category
     self.assign
   end

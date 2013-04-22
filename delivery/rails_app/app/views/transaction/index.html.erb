@@ -2,8 +2,8 @@
   <span>
     <table id=unsorted_transactions>
       <% @unsorted_transactions.each do |t| %>
-        <tr id=t<%= t[:id] %>>
-          <td> <%=t[:description] %></td><td> <%=t[:amount] %> </td>
+        <tr id=t<%= t[:id] %> class='transaction_row'>
+          <td> <%=t[:description] %></td><td class='amount'> <%=t[:amount] %> </td>
         </tr>
       <% end %>
     </table>
@@ -11,8 +11,8 @@
   <span>
     <%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
       <%= text_field_tag(:category) %>
-      <%= hidden_field_tag :transaction_id, 1 %>
-      <%= hidden_field_tag :amount, 35 %>
+      <%= hidden_field_tag :transaction_id %>
+      <%= hidden_field_tag :amount %>
       <%= submit_tag("Assign") %>
     <% end %>
   </span>
