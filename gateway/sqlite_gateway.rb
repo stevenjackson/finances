@@ -25,7 +25,10 @@ class SqliteGateway
   end
 
   def transaction_by_id(id)
-    @db[:transactions][:id => id]
+    r = @db[:transactions][:id => id]
+    unless r.nil?
+      Transaction.new r[:id], r[:description], r[:amount]
+    end
   end
 
   def save(debit)
