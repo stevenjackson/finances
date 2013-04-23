@@ -1,3 +1,12 @@
-<% @balances.each_pair do |key, value| %>
-  <div id=<%=key%>_balance><%=value%></div>
-<% end %>
+<div class="row">
+  <div class="span4 offset8">
+    <table id=category_balances class="table table-striped">
+      <% @balances.each_pair do |key, value| %>
+        <tr>
+          <td><div><%=key%></div></td>
+          <td><div id=<%=key%>_balance><%=value%></div></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
