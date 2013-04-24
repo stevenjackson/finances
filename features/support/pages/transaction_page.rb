@@ -17,4 +17,9 @@ class TransactionPage
     return transactions_element.rows
   end
 
+  def split_first_transaction
+    transactions_element.first.click
+    transactions_element.send_keys '/'
+  end
+
 end

@@ -11,6 +11,8 @@ When(/^I assign the transaction to "(.*?)"$/) do |category|
 end
 
 When(/^I split the transaction$/) do |table|
-    # table is a Cucumber::Ast::Table
-  #   pending # express the regexp above with the code you wish you had
+  visit(TransactionPage).split_first_transaction 
+  table.rows.each do |category, amount|
+    on(SplitTransactionPage).assign(category, amount)
+  end
 end
