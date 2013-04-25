@@ -29,6 +29,9 @@ $(document).ready(function() {
             case 13: //enter
               $("input[value='Assign']").click();
             break;
+            case 191: // slash
+              transaction.split();
+            break;
         }
     };
 
@@ -53,6 +56,10 @@ $(document).ready(function() {
         }
         return prevRow;
     }
+
+    transaction.split = function() {
+        $.post("/transaction/split", { transaction_id: $("#transaction_id").val() });
+    } 
 
     transaction.firstRow = function() {
         return $("#unsorted_transactions tr:first");
