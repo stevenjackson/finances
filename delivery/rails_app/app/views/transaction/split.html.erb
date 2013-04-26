@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="span4">
+    <h2>Split Your Transaction</h2>
+    <table id=split class="table table-bordered">
+       <tr>
+         <td><h3><%= @transaction[:description] %></h3><td><h3>$<%= @transaction[:amount] %></td>
+        </tr>
+        <tr>
+          <td><input class='category'/></td><td><input class='amount'/></td>
+        </tr>
+        <tr>
+          <td>Remainder</td><td>$100000</td>
+        </tr>
+    </table>
+  </div>
+
+</div>
