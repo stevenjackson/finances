@@ -15,4 +15,16 @@ class TransactionController < ApplicationController
   def split
     @transaction = index.find { |t| t[:id].to_s == params[:id]  }
   end
+
+  def save_splits
+    h = {}
+    h[:debits] = []
+    h[:transaction_id] = params[:id]
+    params[:category].each_with_index do |category, index|
+      amount = params[:amount][index]
+      h[:debits] << { category: category, amount: amount}
+    end
+    SplitTransaction.new(gateway).run(h)
+    redirect_to :action => :index
+  end
 end

@@ -7,14 +7,14 @@
 <h2>Split Your Transaction</h2>
 <div class="row">
   <div class="span8">
-      <%= form_tag( {:action => "split"}, {:method => "put"}) do %>
+      <%= form_tag( {:action => "save_splits"}, {:method => "put"}) do %>
         <table id=split_transactions class="table table-striped">
            <tr>
              <td><h3><%= @transaction[:description] %></h3><td><h3>$<span id="transaction_amount"><%= @transaction[:amount] %></span></h3></td>
             </tr>
             <tr class='debit_row'/>
             <tr>
-              <td>Remainder</td><td>$<span id="remainder">100000</span></td>
+              <td>Remainder</td><td>$<span id="remainder"><%= @transaction[:amount] %></span></td>
             </tr>
         </table>
       <%= submit_tag "Save", name: 'split', class: "btn"  %>

@@ -1,39 +1,38 @@
 $(document).ready(function() {
     if ($('table#split_transactions').length) {
-      split.loadFunctions();
-      split.calculateRemainder();
+      split.bindFunctions();
       split.add();
     }
 });
 
 (function(split, $, undefined ) {
-  split.loadFunctions = function() {
+  split.bindFunctions = function() {
     $('table#split_transactions').on('change', 'input.amount', function(){
       split.calculateRemainder();
     });
   };
     
-    split.add = function() {
+  split.add = function() {
+    var row = '<%= escape_javascript(render(partial: "debit_row")) %>';
+    $('#split_transactions tr.debit_row:last').after(row);
+  };
 
-      var row = '<%= escape_javascript(render(partial: "debit_row", locals: {:debit => ""})) %>';
-      $('#split_transactions tr.debit_row:last').after(row);
-    };
+  split.delete = function($element) { 
+    $element.closest('tr').remove();
+    split.calculateRemainder();
+  }
 
-    split.delete = function($element) { 
-      $element.closest('tr').remove();
-    }
+  split.calculateRemainder = function() {
+    var remainder = parseInt($('#transaction_amount').text(), 10);
+    $('input.amount').each(function( index ) {
+    val = $(this).val();
+    if(!val) {
+        val = 0;
+      }
+      remainder -= parseInt(val, 10);
+    });
 
-    split.calculateRemainder = function() {
-      var remainder = parseInt($('#transaction_amount').text(), 10);
-      $('input.amount').each(function( index ) {
-        val = $(this).val();
-        if(!val) {
-          val = 0;
-        }
-        remainder -= parseInt(val, 10);
-      });
-
-      $('#remainder').text(remainder);
-    }
+    $('#remainder').text(remainder);
+  }
 
 }( window.split = window.split || {}, jQuery ));
