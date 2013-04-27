@@ -7,13 +7,14 @@ $(document).ready(function() {
 });
 
 (function(split, $, undefined ) {
-    split.loadFunctions = function() {
-        $("img plus add").click(function(){
-            split.add();
-        });
-    };
+  split.loadFunctions = function() {
+    $('table#split_transactions').on('change', 'input.amount', function(){
+      split.calculateRemainder();
+    });
+  };
     
     split.add = function() {
+
       var row = '<%= escape_javascript(render(partial: "debit_row", locals: {:debit => ""})) %>';
       $('#split_transactions tr.debit_row:last').after(row);
     };
@@ -23,10 +24,16 @@ $(document).ready(function() {
     }
 
     split.calculateRemainder = function() {
-        var total = $('#transaction_amount').text();
-        
+      var remainder = parseInt($('#transaction_amount').text(), 10);
+      $('input.amount').each(function( index ) {
+        val = $(this).val();
+        if(!val) {
+          val = 0;
+        }
+        remainder -= parseInt(val, 10);
+      });
 
-        $('#remainder').text(total);
+      $('#remainder').text(remainder);
     }
 
 }( window.split = window.split || {}, jQuery ));
