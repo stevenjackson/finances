@@ -1,6 +1,6 @@
 <% content_for(:head) do %>
   <script type="text/javascript">
-    <%= render :partial => "split_transaction.js.erb" %>
+    <%= render :partial => "split_transaction", :formats => :js, :handlers => [:erb, :js] %>
   </script>
 <% end %>
 
