@@ -1,0 +1,31 @@
+$(document).ready(function() {
+    if ($('table#split_transactions').length) {
+      split.loadFunctions();
+      split.calculateRemainder();
+      split.add();
+    }
+});
+
+(function(split, $, undefined ) {
+    split.loadFunctions = function() {
+        $("img plus add").click(function(){
+            split.add();
+        });
+    };
+    
+    split.add = function() {
+           $('#split_transactions tr.debit_row:last').after("<tr class='debit_row'><td><input class='category'/></td><td><input class='amount'/></td><td><a onclick='window.split.add(); return false;' href='#'><img src='/assets/plus.png' alt='Add' height='32' width'32'/></a></td><td><a onclick='window.split.delete($(this)); return false;' href='#'><img src='/assets/delete.png' alt='Delete' height='32' width='32'/></a></td></tr>");
+    };
+
+    split.delete = function($element) { 
+      $element.closest('tr').remove();
+    }
+
+    split.calculateRemainder = function() {
+        var total = $('#transaction_amount').text();
+        
+
+        $('#remainder').text(total);
+    }
+
+}( window.split = window.split || {}, jQuery ));
