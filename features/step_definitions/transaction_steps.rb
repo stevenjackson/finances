@@ -12,7 +12,7 @@ end
 
 When(/^I split the transaction$/) do |table|
   visit(TransactionPage).split_first_transaction 
-  table.rows.each do |category, amount|
-    on(SplitTransactionPage).assign(category, amount)
+  table.rows.each_with_index.map { |a, index| [a[0], a[1], index] }.each do |category, amount, index|
+    on(SplitTransactionPage).assign(category, amount, index)
   end
 end
