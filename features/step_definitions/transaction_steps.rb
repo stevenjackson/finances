@@ -15,4 +15,5 @@ When(/^I split the transaction$/) do |table|
   table.rows.each_with_index.map { |a, index| [a[0], a[1], index] }.each do |category, amount, index|
     on(SplitTransactionPage).assign(category, amount, index)
   end
+  on(SplitTransactionPage).save
 end
