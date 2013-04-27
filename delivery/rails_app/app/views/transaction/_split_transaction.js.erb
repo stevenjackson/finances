@@ -14,7 +14,8 @@ $(document).ready(function() {
     };
     
     split.add = function() {
-           $('#split_transactions tr.debit_row:last').after("<tr class='debit_row'><td><input class='category'/></td><td><input class='amount'/></td><td><a onclick='window.split.add(); return false;' href='#'><img src='/assets/plus.png' alt='Add' height='32' width'32'/></a></td><td><a onclick='window.split.delete($(this)); return false;' href='#'><img src='/assets/delete.png' alt='Delete' height='32' width='32'/></a></td></tr>");
+      var row = '<%= escape_javascript(render(partial: "debit_row", locals: {:debit => ""})) %>';
+      $('#split_transactions tr.debit_row:last').after(row);
     };
 
     split.delete = function($element) { 

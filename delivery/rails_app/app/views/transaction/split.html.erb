@@ -1,3 +1,8 @@
+<% content_for(:head) do %>
+  <script type="text/javascript">
+    <%= render :partial => "split_transaction.js.erb" %>
+  </script>
+<% end %>
 
 <h2>Split Your Transaction</h2>
 <div class="row">
@@ -5,7 +10,7 @@
       <%= form_tag( {:action => "split"}, {:method => "put"}) do %>
         <table id=split_transactions class="table table-striped">
            <tr>
-             <td><h3><%= @transaction[:description] %></h3><td><h3>$<span id="transaction_amount"><%= @transaction[:amount] %></span></td>
+             <td><h3><%= @transaction[:description] %></h3><td><h3>$<span id="transaction_amount"><%= @transaction[:amount] %></span></h3></td>
             </tr>
             <tr class='debit_row'/>
             <tr>
