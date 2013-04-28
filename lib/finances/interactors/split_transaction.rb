@@ -5,10 +5,10 @@ class Finances::SplitTransaction
   end
 
   def run(params)
-    params[:debits].each do |debit|
-      debit = Debit.new params[:transaction_id], params[:category], params[:amount]
-      @gateway.save(debit)
+    debits = params[:debits].map do |debit|
+      Debit.new params[:transaction_id], debit[:category], debit[:amount]
     end
+    debits.each { |debit| @gateway.save(debit) }
   end
 
 end
