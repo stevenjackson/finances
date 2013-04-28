@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in finances.gemspec
 gemspec
 
+#Old ofx is no longer being maintained and uses iconv
+gem 'ofx', :git => 'git@github.com:floehopper/ofx.git'
 
 group :test do
   gem "cucumber"
