@@ -4,11 +4,11 @@ class Finances::GetUnsortedTransactions
   end
 
   def run
-    sorted_transactions = @gateway.debits.map do |debit|
-      @gateway.transaction_by_id debit.transaction_id
+    sorted_transaction_ids = @gateway.debits.map do |debit|
+      debit.transaction_id
     end
     unsorted_transactions = @gateway.transactions.reject do |t|
-      sorted_transactions.include? t
+      sorted_transaction_ids.include? t.id
     end
     unsorted_transactions.map { |t| t.to_h }
   end

@@ -11,18 +11,46 @@ describe ImportOfx do
 
   before(:each) do
     gateway.stub(:file_path) { File.expand_path 'test.ofx' }
+    gateway.stub(:save)
+    gateway.stub(:account_by_name) { Account.new(1, 'checking') }
+  end
+
+  after(:all) do
+    File.delete('test.ofx')
   end
 
   it "finds a file to import" do
-    action.run file: 'text.ofx'
+    action.run account: 'checking', file: 'text.ofx'
     action.should be_file_loaded
   end
 
   it "finds transactions" do
-    action.run file: 'text.ofx'
-
+    action.run account: 'checking', file: 'text.ofx'
     action.transactions.count.should == 2
   end
+
+  it "saves transactions" do
+    gateway.should_receive(:save) do |arg1|
+      arg1.should be_a Transaction
+    end.twice
+    action.run account: 'checking', file: 'text.ofx'
+  end
+
+  it "saves all the data" do
+    action.run account: 'checking', file: 'text.ofx'
+    t = action.transactions.first
+    t.id.should be_nil
+    t.description.should == "GROCER A & Z"
+    t.amount.should == -99
+    t.account_id.should == 1
+    t.fit_id.should == '00000000000000000000000004'
+    t.amount_in_pennies.should == -9891
+    t.nick_name.should be_nil
+    t.posted_at.should == Time.new(2009, 2, 9)
+    t.type.should == :debit
+  end
+
+
 
   def ofx_file
   '''
@@ -73,14 +101,14 @@ NEWFILEUID:NONE
 <TRNTYPE>DEBIT
 <DTPOSTED>20090209000000[-5:EST]
 <TRNAMT>-98.91
-<FITID>00000000000000000000000000
+<FITID>00000000000000000000000004
 <NAME>GROCER A & Z
 </STMTTRN>
 <STMTTRN>
 <TRNTYPE>CREDIT
 <DTPOSTED>20090209000000[-5:EST]
 <TRNAMT>308.86
-<FITID>00000000000000000000000000
+<FITID>00000000000000000000000007
 <NAME>DEPOSIT    000000
 </STMTTRN>
 </BANKTRANLIST>

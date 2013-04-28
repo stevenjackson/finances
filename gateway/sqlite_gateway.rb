@@ -19,19 +19,23 @@ class SqliteGateway
   end
 
   def transactions
-    @db[:transactions].map do |r|
-      Transaction.new r[:id], r[:description], r[:amount]
-    end
+    @db[:transactions].map { |r| to_transaction r }
   end
 
   def transaction_by_id(id)
-    r = @db[:transactions][:id => id]
-    unless r.nil?
-      Transaction.new r[:id], r[:description], r[:amount]
-    end
+    to_transaction @db[:transactions][:id => id]
   end
 
   def save(debit)
     @db[:debits].insert :transaction_id => debit.transaction_id, :category => debit.category, :amount => debit.amount
+  end
+
+  private
+  def to_transaction(r)
+    return if r.nil?
+
+    Transaction.new id: r[:id],
+      description: r[:description],
+      amount: r[:amount]
   end
 end

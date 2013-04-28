@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe GetUnsortedTransactions do
   let(:gateway) { double("Gateway") }
-  let(:t1) { Transaction.new(1, 'desc', 100) }
-  let(:t2) { Transaction.new(2, 'desc', 10) }
+  let(:t1) { Transaction.new(id: 1, amount: 100) }
+  let(:t2) { Transaction.new(id: 2, amount: 10) }
   let(:action) { GetUnsortedTransactions.new gateway  }
 
   before(:each) do
