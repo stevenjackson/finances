@@ -1,0 +1,6 @@
+<tr class='debit_row'>
+  <td><%= text_field_tag 'category[]', nil, class: 'category' %></td>
+  <td><%= number_field_tag 'amount[]', nil, class: 'amount' %></td>
+  <td><%= link_to_function(image_tag('plus.png'), 'window.split.add()') %> </td>
+  <td><%= link_to_function(image_tag('delete.png'), 'window.split.delete($(this))') %> </td>
+</tr>

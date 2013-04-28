@@ -29,6 +29,9 @@ $(document).ready(function() {
             case 13: //enter
               $("input[value='Assign']").click();
             break;
+            case 191: // slash
+              $("input[value='Split']").click();
+            break;
         }
     };
 
