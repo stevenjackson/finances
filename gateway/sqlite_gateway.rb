@@ -26,13 +26,30 @@ class SqliteGateway
     to_transaction @db[:transactions][:id => id]
   end
 
-  def save(debit)
+  def save(o)
+    case o
+    when Debit
+      save_debit o
+    when Transaction
+      save_transaction o
+    end
+  end
+
+  def save_debit(debit)
     @db[:debits].insert :transaction_id => debit.transaction_id, :category => debit.category, :amount => debit.amount
+  end
+
+  def save_transaction(transaction)
+    @db[:transactions].insert :account_id => transaction.account_id, :fit_id => transaction.fit_id, :description => transaction.description, :amount => transaction.amount, :amount_in_pennies => transaction.amount_in_pennies, :nick_name => transaction.nick_name, :posted_at => transaction.posted_at, :type => transaction.type.to_s
   end
 
   def account_by_name(name)
     @db[:accounts][:name => name]
     Account.new r[:id], r[:name], r[:balance]
+  end
+
+  def transactions_by_account_id(account_id)
+    @db[:transactions][:account_id => account_id].map { |r| to_transaction r }
   end
 
   private
