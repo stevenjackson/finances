@@ -5,9 +5,7 @@ describe AssignTransaction do
   let(:action) { AssignTransaction.new gateway  }
 
   it "saves debits" do
-    gateway.should_receive(:save) do |arg1|
-      arg1.should be_a Debit
-    end
+    gateway.should_receive(:save).with(kind_of(Debit))
     action.run transaction_id: 1, category: "abc", amount: 123
   end
 
