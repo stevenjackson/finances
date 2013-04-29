@@ -1,2 +1,2 @@
-Finances::Account = Struct.new(:id, :name) do
+Finances::Account = Struct.new(:id, :name, :balance) do
 end

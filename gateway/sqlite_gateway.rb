@@ -30,6 +30,11 @@ class SqliteGateway
     @db[:debits].insert :transaction_id => debit.transaction_id, :category => debit.category, :amount => debit.amount
   end
 
+  def account_by_name(name)
+    @db[:accounts][:name => name]
+    Account.new r[:id], r[:name], r[:balance]
+  end
+
   private
   def to_transaction(r)
     return if r.nil?
