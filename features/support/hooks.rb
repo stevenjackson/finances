@@ -1,13 +1,14 @@
 require 'watir-webdriver'
 
 
+browser = Watir::Browser.new :firefox
 
 Before do
-  @browser = Watir::Browser.new :firefox
+  @browser = browser
   @database = TestDatabase.new
 end
 
 
-After do
-  @browser.close
+at_exit do
+  browser.close
 end
