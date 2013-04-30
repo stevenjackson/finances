@@ -13,7 +13,7 @@ Feature:  Distribute transactions amongst categories
 
   Scenario:  Transactions can be split
     Given I have a category for "groc" with an amount of $100
-    Given I have a category for "gas" with an amount of $15
+    And I have a category for "gas" with an amount of $15
     And I have a transaction for $35
     When I split the transaction
       | category | amount |
