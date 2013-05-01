@@ -8,6 +8,7 @@ RailsApp::Application.routes.draw do
       put 'save_splits'
     end
   end
+  resources :deposit
   root to: 'dashboard#home'
 
 end
