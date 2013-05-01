@@ -15,6 +15,10 @@ class TestDatabase
   end
 
   def insert_transaction(amount)
-    @db[:transactions].insert :description => "Trans", :amount => amount
+    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}"
+  end
+
+  def insert_deposit(amount)
+    @db[:transactions].insert :description => "Deposit", :amount => amount
   end
 end

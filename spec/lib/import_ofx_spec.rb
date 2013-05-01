@@ -40,7 +40,7 @@ describe ImportOfx do
     t = action.transactions.first
     t.id.should be_nil
     t.description.should == "GROCER A & Z"
-    t.amount.should == -99
+    t.amount.should == 99
     t.account_id.should == 1
     t.fit_id.should == '00000000000000000000000004'
     t.amount_in_pennies.should == -9891

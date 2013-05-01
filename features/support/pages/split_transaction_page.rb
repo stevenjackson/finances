@@ -1,8 +1,6 @@
 class SplitTransactionPage
   include PageObject
 
-  text_field(:category, :class => 'category')
-  text_field(:amount, :class => 'amount')
   image(:add, :alt => 'Plus')
   button(:save, :text => "Save")
 
