@@ -1,1 +1,11 @@
-<p>Find me in app/views/deposit/index.html.erb</p>
+<div class="row">
+  <div class="span4">
+    <table id=unsorted_deposits class="table table-bordered">
+      <% @unsorted_deposits.each do |t| %>
+        <tr id=deposit_<%= t[:id] %>>
+          <td> <%= link_to t[:description], deposit_path(t[:id]) %></td><td class='amount'> <%=t[:amount] %> </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,8 +1,6 @@
 class DepositPage
   include PageObject
 
-  page_url "#{FigNewton.base_url}/deposit"
-
   image(:add, :alt => 'Plus')
   button(:save, :text => "Save")
 
