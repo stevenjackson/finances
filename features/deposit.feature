@@ -8,7 +8,6 @@ Feature:  Distribute a deposit amongst categories
    Then I should see $150 for "groc"
    And I should see $150 for "rent"
 
-  @guard
   Scenario: Viewing the deposit
    Given I have a deposit for $300
    When I distribute the deposit
