@@ -1,6 +1,6 @@
 Sequel.migration do
   change do
-    create_table? :debits do
+    create_table? :credits do
       primary_key :id
       FixNum :transaction_id
       String :category

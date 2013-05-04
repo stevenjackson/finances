@@ -7,7 +7,7 @@
 <h2>Distribute Your Deposit</h2>
 <div class="row">
   <div class="span8">
-      <%= form_tag( {:action => "edit"}, {:method => "put"}) do %>
+      <%= form_tag( {:action => "update"}, {:method => "put"}) do %>
         <table id=split_transactions class="table table-striped">
            <tr>
              <td><h3><%= @deposit[:description] %></h3><td><h3>$<span id="transaction_amount"><%= @deposit[:amount] %></span></h3></td>

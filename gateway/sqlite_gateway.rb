@@ -18,6 +18,12 @@ class SqliteGateway
     end
   end
 
+  def credits
+    @db[:credits].map do |r|
+      Credit.new r[:transaction_id], r[:category], r[:amount]
+    end
+  end
+
   def transactions
     @db[:transactions].map { |r| to_transaction r }
   end
@@ -32,6 +38,8 @@ class SqliteGateway
       save_debit o
     when Transaction
       save_transaction o
+    when Credit
+      save_credit o
     end
   end
 
@@ -41,6 +49,10 @@ class SqliteGateway
 
   def save_transaction(transaction)
     @db[:transactions].insert :account_id => transaction.account_id, :fit_id => transaction.fit_id, :description => transaction.description, :amount => transaction.amount, :amount_in_pennies => transaction.amount_in_pennies, :nick_name => transaction.nick_name, :posted_at => transaction.posted_at, :type => transaction.type.to_s
+  end
+
+  def save_credit(credit)
+    @db[:credits].insert :transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount
   end
 
   def account_by_name(name)

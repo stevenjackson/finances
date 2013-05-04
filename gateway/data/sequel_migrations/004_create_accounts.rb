@@ -1,9 +1,9 @@
 Sequel.migration do
   change do
-    create_table? :categories do
+    create_table? :accounts do
         primary_key :id
         String :name
-        FixNum :budget
+        FixNum :balance
     end
   end
 end
