@@ -55,6 +55,17 @@ class SqliteGateway
     @db[:credits].insert :transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount
   end
 
+  def delete(o)
+    case o
+    when Credit
+      delete_credit o
+    end
+  end
+
+  def delete_credit(credit)
+      @db[:credits].where(:transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount).delete
+  end
+
   def account_by_name(name)
     @db[:accounts][:name => name]
     Account.new r[:id], r[:name], r[:balance]

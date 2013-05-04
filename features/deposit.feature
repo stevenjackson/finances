@@ -18,3 +18,13 @@ Feature:  Distribute a deposit amongst categories
      | category  | amount |
      | groc      | 150    |
      | rent      | 150    |
+
+  Scenario:  Delete an item from the deposit
+    Given I have a deposit for $300
+    And I distribute the deposit
+     | category  | amount |
+     | groc      | 150    |
+     | rent      | 150    |
+    When I delete the credits
+    Then I should see $0 for "groc"
+    And I should see $0 for "rent"

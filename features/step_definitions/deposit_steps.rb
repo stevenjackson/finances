@@ -13,9 +13,14 @@ When(/^I distribute the deposit$/) do |table|
   on(DepositPage).save
 end
 
-Then(/I should see the deposit:$/) do |table|
+Then(/^I should see the deposit:$/) do |table|
   visit(DepositListPage).show_first
   table.rows.each do | category, amount |
     on(DepositPage).amount_for(category).should == amount
   end
+end
+
+When (/^I delete the credits$/) do
+  visit(DepositListPage).show_first
+  on(DepositPage).delete_all
 end

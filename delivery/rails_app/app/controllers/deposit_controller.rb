@@ -8,13 +8,12 @@ class DepositController < ApplicationController
     @deposit = index.find { |t| t[:id] == transaction_id  }
     @credits = GetCredits.new(gateway).run(transaction_id: transaction_id)
   end
-  
+
   def update
-    h = {}
-    h[:credits] = []
-    h[:transaction_id] = params[:id]
-    params[:category].each_with_index do |category, index|
-      amount = params[:amount][index]
+    h = { credits: [], transaction_id: params[:id].to_i }
+    params[:category] ||= []
+    params[:category].reject { |c| c.blank? }.each_with_index do |category, index|
+      amount = params[:amount][index].to_i
       h[:credits] << { category: category, amount: amount}
     end
     DistributeDeposit.new(gateway).run(h)

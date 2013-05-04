@@ -2,6 +2,7 @@ class DepositPage
   include PageObject
 
   image(:add, :alt => 'Plus')
+  image(:delete, :alt => 'Delete')
   button(:save, :text => "Save")
 
   def assign(category, amount)
@@ -11,6 +12,19 @@ class DepositPage
   end
 
   def amount_for(category)
-    text_field_element(:class => 'category', :text => category).parent.parent.text_field_element(:class => 'amount').value
+    row_for(category).text_field_element(:class => 'amount').value
+  end
+
+
+
+  def delete_all
+    while(delete?)
+      delete_element.click
+    end
+    save
+  end
+
+  def row_for(category)
+    text_field_element(:class => 'category', :text => category).parent.parent
   end
 end
