@@ -1,1 +1,2 @@
 default: --no-source --color --format pretty
+guard: --no-source --color --format progress --tag @guard

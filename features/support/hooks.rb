@@ -1,14 +1,30 @@
 require 'watir-webdriver'
 
 
-browser = Watir::Browser.new :firefox
+Before ('@guard') do
+  @browser = browser('@guard')
+end
 
 Before do
   @browser = browser
   @database = TestDatabase.new
 end
 
+def browser(tag=nil)
+  return $browser unless $browser.nil?
+
+  if('@guard' == tag)
+    $browser = Watir::Browser.new :phantomjs
+  else
+    $browser = Watir::Browser.new :firefox
+  end
+end
 
 at_exit do
-  browser.close
+  begin
+    $browser.quit unless $browser.nil?
+  rescue
+  ensure
+    $browser = nil
+  end
 end

@@ -15,7 +15,7 @@ group :tests, :halt_on_fail => true  do
     watch('spec/spec_helper.rb')  { "spec" }
   end
 
-  guard 'cucumber', :cli => '--drb --format progress --no-profile --tag @wip', :notification => true, :all_after_pass => false do
+  guard 'cucumber', :cli => '--drb --profile guard', :notification => true, :all_after_pass => false do
     watch(%r{^features/.+$})                  { "features" }
     watch(%r{^lib/.+\.rb$})                   { "features" }
     watch(%r{^cucumber.yml$})                 { "features" }
