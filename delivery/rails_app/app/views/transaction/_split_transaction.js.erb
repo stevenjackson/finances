@@ -13,7 +13,7 @@ $(document).ready(function() {
   };
     
   split.add = function() {
-    var row = '<%= escape_javascript(render(partial: "debit_row")) %>';
+    var row = '<%= escape_javascript(render(partial: "transaction/debit_row")) %>';
     $('#split_transactions tr.debit_row:last').after(row);
   };
 

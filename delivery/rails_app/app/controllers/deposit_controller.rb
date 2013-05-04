@@ -4,6 +4,6 @@ class DepositController < ApplicationController
   end
 
   def edit
-    @deposit =  {:id => '1', :description => 'things', :amount => 600 }
+    @deposit = index.find { |t| t[:id].to_s == params[:id]  }
   end
 end
