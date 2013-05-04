@@ -12,3 +12,10 @@ When(/^I distribute the deposit$/) do |table|
   end
   on(DepositPage).save
 end
+
+Then(/I should see the deposit:$/) do |table|
+  visit(DepositListPage).show_first
+  table.rows.each do | category, amount |
+    on(DepositPage).amount_for(category).should == amount
+  end
+end

@@ -2,6 +2,7 @@ $(document).ready(function() {
     if ($('table#split_transactions').length) {
       split.bindFunctions();
       split.add();
+      split.calculateRemainder();
     }
 });
 

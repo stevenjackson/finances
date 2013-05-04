@@ -4,7 +4,9 @@ class DepositController < ApplicationController
   end
 
   def edit
-    @deposit = index.find { |t| t[:id].to_s == params[:id]  }
+    transaction_id = params[:id].to_i
+    @deposit = index.find { |t| t[:id] == transaction_id  }
+    @credits = GetCredits.new(gateway).run(transaction_id: transaction_id)
   end
   
   def update
