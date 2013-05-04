@@ -1,6 +1,6 @@
 class DepositController < ApplicationController
   def index
-    @unsorted_deposits = GetUnsortedDeposits.new(gateway).run 
+    @deposits = GetDeposits.new(gateway).run
   end
 
   def edit

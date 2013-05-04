@@ -1,4 +1,4 @@
-class Finances::GetUnsortedDeposits
+class Finances::GetDeposits
   def initialize(gateway)
     @gateway = gateway
   end
