@@ -24,4 +24,8 @@ class Finances::Transaction
       hash
     end
   end
+
+  def credit?
+    self.type == :credit
+  end
 end
