@@ -24,6 +24,12 @@ class SqliteGateway
     end
   end
 
+  def accounts
+    @db[:accounts].map do |r|
+      Account.new r[:id], r[:name], r[:balance]
+    end
+  end
+
   def transactions
     @db[:transactions].map { |r| to_transaction r }
   end
@@ -79,8 +85,6 @@ class SqliteGateway
   def to_transaction(r)
     return if r.nil?
 
-    Transaction.new id: r[:id],
-      description: r[:description],
-      amount: r[:amount]
+    Transaction.new r.to_h 
   end
 end

@@ -18,6 +18,10 @@ class Finances::Transaction
     self.type = type
   end
 
+  def type=(val)
+    @type = val.to_sym unless val.nil?
+  end
+
   def to_h
     instance_variables.reduce({}) do |hash, var|
       hash[var[1..-1].to_sym] = instance_variable_get(var)

@@ -21,4 +21,13 @@ class TestDatabase
   def insert_deposit(amount)
     @db[:transactions].insert :description => "Deposit", :amount => amount
   end
+
+  def insert_account(account, balance)
+    @db[:accounts].insert :name => account, :balance => balance
+  end
+
+  def debit_account(account, amount)
+    account_id = @db[:accounts][:name => account][:id]
+    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :account_id => account_id
+  end
 end
