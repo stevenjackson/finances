@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe GetBalances do
+describe GetCategoryBalances do
   let(:gateway) { double("Gateway") }
-  let(:action) { GetBalances.new gateway  }
+  let(:action) { GetCategoryBalances.new gateway  }
 
   before(:each) do
     gateway.stub(:categories) { [Category.new('stuff', 100)] }

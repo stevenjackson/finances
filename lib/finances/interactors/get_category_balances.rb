@@ -1,4 +1,4 @@
-class Finances::GetBalances
+class Finances::GetCategoryBalances
   def initialize(gateway)
     @gateway = gateway
   end
