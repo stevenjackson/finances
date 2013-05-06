@@ -15,6 +15,15 @@ task :db_migrate do
   end
 end
 
+desc "Rollback to version given"
+task :db_rollback, :target do |t, args|
+  target_version = args[:target].to_i
+  migrations_dir = find_path 'data', 'sequel_migrations'
+  Dir.glob("#{db_dir}/*.sqlite") do |item|
+    puts `sequel -M #{target_version} -m #{migrations_dir} sqlite://#{item}`
+  end
+end
+
 def db_dir
   find_path 'data'
 end
