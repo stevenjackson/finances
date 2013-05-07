@@ -2,7 +2,7 @@ Feature:  Show a dashboard with current financial stats
   This is an at-a-glance overview of current budget/spending information
 
   Scenario:  Categories show totals
-    Given  I have a category for "groc" with an amount of $100
+    Given  I have a budget of $100 for "groc"
     When I spend $60 of "groc"
     Then I should see $40 for "groc"
 

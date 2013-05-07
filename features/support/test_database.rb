@@ -10,8 +10,12 @@ class TestDatabase
     @db[:categories].insert :name => category, :budget => amount
   end
 
-  def debit_category(category, amount)
-    @db[:debits].insert :category => category, :amount => amount
+  def debit_category(category, amount, applied_on=Time.now)
+    @db[:debits].insert :category => category, :amount => amount, :date_applied => applied_on
+  end
+
+  def credit_category(category, amount, applied_on=Time.now)
+    @db[:credits].insert :category => category, :amount => amount, :date_applied => applied_on
   end
 
   def insert_transaction(amount)
