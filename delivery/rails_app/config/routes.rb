@@ -9,6 +9,9 @@ RailsApp::Application.routes.draw do
     end
   end
   resources :deposit
+
+  get '/month(/:month(/:year))' => 'month#show'
+
   root to: 'dashboard#home'
 
 end
