@@ -10,8 +10,7 @@ RailsApp::Application.routes.draw do
   end
   resources :deposit
 
-  get '/month(/:month(/:year))' => 'month#show'
-
+  get '/:month(/:year)' => 'dashboard#month'
   root to: 'dashboard#home'
 
 end
