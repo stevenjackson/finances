@@ -1,7 +1,7 @@
 class MonthPage
   include PageObject
 
-  page_url "#{FigNewton.base_url}/month"
+  page_url "#{FigNewton.base_url}/#{Time.new.strftime("%B")}"
 
   def budget_for(category)
     value category, 'budget'
@@ -20,6 +20,6 @@ class MonthPage
   end
 
   def row_for(category)
-    cell_element(:class => 'category', :text => category).parent.parent
+    cell_element(:class => 'category', :text => category).parent
   end
 end
