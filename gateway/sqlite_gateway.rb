@@ -14,13 +14,13 @@ class SqliteGateway
 
   def debits
     @db[:debits].map do |r|
-      Debit.new r[:transaction_id], r[:category], r[:amount]
+      Debit.new r.to_h
     end
   end
 
   def credits
     @db[:credits].map do |r|
-      Credit.new r[:transaction_id], r[:category], r[:amount]
+      Credit.new r.to_h
     end
   end
 

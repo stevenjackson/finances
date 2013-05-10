@@ -16,7 +16,7 @@ describe GetUnsortedTransactions do
   end
 
   it "filters assigned transactions" do
-    gateway.stub(:debits) { [Debit.new(t2.id, 'stuff', 10)] }
+    gateway.stub(:debits) { [Debit.new(transaction_id: t2.id, category: 'stuff', amount: 10)] }
     action.run.should == [t1.to_h]
   end
 

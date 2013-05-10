@@ -6,7 +6,7 @@ class Finances::DistributeDeposit
 
   def run(params)
     credits = params[:credits].map do |credit|
-      Credit.new params[:transaction_id], credit[:category], credit[:amount]
+      Credit.new transaction_id: params[:transaction_id], category: credit[:category], amount: credit[:amount]
     end
 
     stored_credits = @gateway.credits.select { |credit| credit.transaction_id == params[:transaction_id] }

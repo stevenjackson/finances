@@ -5,7 +5,7 @@ class Finances::AssignTransaction
   end
 
   def run(params)
-    debit = Debit.new params[:transaction_id], params[:category], params[:amount]
+    debit = Debit.new params.to_h
     @gateway.save(debit)
   end
 

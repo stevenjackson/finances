@@ -11,13 +11,13 @@ describe GetCategoryBalances do
   end
 
   it "subtract debits from category balances" do
-    gateway.stub(:debits) { [Debit.new(1, 'stuff', 10)] }
+    gateway.stub(:debits) { [Debit.new(transaction_id: 1, category: 'stuff', amount: 10)] }
 
     action.run[:stuff].should be 90
   end
 
   it "adds credits to category balances" do
-    gateway.stub(:credits) { [Credit.new(1, 'stuff', 10)] }
+    gateway.stub(:credits) { [Credit.new(transaction_id: 1, category: 'stuff', amount: 10)] }
 
     action.run[:stuff].should be 110
   end

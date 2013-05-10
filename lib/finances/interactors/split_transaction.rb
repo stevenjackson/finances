@@ -6,7 +6,7 @@ class Finances::SplitTransaction
 
   def run(params)
     debits = params[:debits].map do |debit|
-      Debit.new params[:transaction_id], debit[:category], debit[:amount]
+      Debit.new(transaction_id:  params[:transaction_id], category: debit[:category], amount: debit[:amount])
     end
     debits.each { |debit| @gateway.save(debit) }
   end

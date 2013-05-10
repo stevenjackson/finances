@@ -3,9 +3,9 @@ require 'spec_helper'
 describe GetCredits do
   let(:gateway) { double 'gateway' }
   let(:action) { GetCredits.new gateway }
-  let(:c1) { Credit.new 1, 'stuff', 10 }
-  let(:c2) { Credit.new 2, 'stuff', 20 }
-  let(:c3) { Credit.new 1, 'things', 30 }
+  let(:c1) { Credit.new transaction_id: 1, category: 'stuff', amount: 10 }
+  let(:c2) { Credit.new transaction_id: 2, category: 'stuff', amount: 20 }
+  let(:c3) { Credit.new transaction_id: 1, category: 'things', amount: 30 }
 
   before(:each) do
     gateway.stub(:credits) { [c1, c2, c3] }
