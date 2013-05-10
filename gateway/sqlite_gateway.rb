@@ -14,13 +14,13 @@ class SqliteGateway
 
   def debits
     @db[:debits].map do |r|
-      Debit.new r.to_h
+      Debit.new r.to_h.keep_if { |key, value| Debit.method_defined? key }
     end
   end
 
   def credits
     @db[:credits].map do |r|
-      Credit.new r.to_h
+      Credit.new r.to_h.keep_if { |key, value| Credit.method_defined? key }
     end
   end
 
