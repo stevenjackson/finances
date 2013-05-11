@@ -1,11 +1,11 @@
 class Finances::GetCategoryBalanceSheet
+  include Finances::DateParams
   def initialize(gateway)
     @gateway = gateway
   end
 
   def run(params={})
-    @month = parse_month params[:month]
-    @year = params[:year] || Time.new.to_date.year
+    @month, @year = parse_date params
     categories.map do |c|
     {
         category: c.name,
@@ -26,16 +26,5 @@ class Finances::GetCategoryBalanceSheet
 
   def amount_added(category)
     @gateway.credits.select{ |c| c.matches?(category.name, @month, @year) }.reduce(0) { |sum, c| sum + c.amount }
-  end
-
-  def parse_month(month) 
-    case month
-    when nil
-      Time.new.to_date.month
-    when String
-      Date.strptime(month, "%b").month
-    when Fixnum
-      month
-    end
   end
 end

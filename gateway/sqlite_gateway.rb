@@ -78,7 +78,14 @@ class SqliteGateway
   end
 
   def transactions_by_account_id(account_id)
-    @db[:transactions][:account_id => account_id].map { |r| to_transaction r }
+    @db[:transactions].filter(:account_id => account_id).map { |r| to_transaction r }
+  end
+
+  def account_balances(account)
+    @db[:account_balances].filter(:account_id => account.id).map do |r|
+      AccountBalance.new account: account, balance: r[:balance], date: r[:date]
+    end
+
   end
 
   private
