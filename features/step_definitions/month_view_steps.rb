@@ -1,5 +1,6 @@
 When /^I have a credit for \$(\d+) in "(.*?)" last month$/ do |amount, category|
-  @database.credit_category category, amount, last_month
+  #Not sure how to capture this idea yet - deposits are applied to next month (to fill the envelope for next month)
+  @database.credit_category category, amount, this_month
 end
 
 

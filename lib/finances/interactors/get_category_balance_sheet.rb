@@ -17,7 +17,7 @@ class Finances::GetCategoryBalanceSheet
   end
 
   def categories()
-    @gateway.categories(@month, @year)
+    @gateway.categories
   end
 
   def amount_spent(category)

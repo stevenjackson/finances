@@ -5,6 +5,6 @@ class DashboardController < ApplicationController
   end
 
   def month
-    @categories = GetCategorySummaries.new(gateway).run params
+    @categories = GetCategoryBalanceSheet.new(gateway).run params
   end
 end
