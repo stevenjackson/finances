@@ -11,4 +11,16 @@
       <% end %>
     </table>
   </div>
+  <div class="span4">
+    <table id=accounts class="table table-striped">
+      <% @accounts.each do |account| %>
+        <tr>
+          <td class='account'><%= account[:account] %></td>
+          <td class='starting'><%= account[:starting] %></td>
+          <td class='ending'><%= account[:ending] %><td>
+          <td class='change'><%= account[:change] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
