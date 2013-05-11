@@ -44,3 +44,11 @@ Then /^I should see accounts for this month:$/ do |table|
   end
   table.diff! actual_table
 end
+
+Then /^I should see \$(\d+) for deposits this month$/ do |amount|
+  visit(MonthPage).total_deposits.should == amount
+end
+
+Then /^I should see \$(\d+) for expenses this month$/ do |amount|
+  visit(MonthPage).total_expenses.should == amount
+end

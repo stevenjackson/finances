@@ -3,6 +3,9 @@ class MonthPage
 
   page_url "#{FigNewton.base_url}/#{Time.new.strftime("%B")}"
 
+  cell :total_deposits, :id => 'total_deposits'
+  cell :total_expenses, :id => 'total_expenses'
+
   def budget_for(category)
     category_value category, 'budget'
   end
