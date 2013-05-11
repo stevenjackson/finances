@@ -10,6 +10,7 @@ describe GetAccountBalanceSheet do
     gateway.stub(:accounts) { [checking] }
     gateway.stub(:account_balances) { [checking_balance] }
     gateway.stub(:transactions_by_account_id) { [transaction] }  
+    checking_balance.date = last_month
   end
   
   it "provides balances for the current month by default" do
@@ -21,6 +22,18 @@ describe GetAccountBalanceSheet do
     sheet.first[:starting].should == 80
     sheet.first[:ending].should == 30
     sheet.first[:change].should == -50
+  end
+
+  it "defaults the starting balance to zero" do
+    checking_balance.date = next_month
+    checking_balance.balance = 80
+
+    action.run.first[:starting].should == 0
+  end
+
+  it "doesn't show transactions from other months" do
+    transaction.posted_at = last_month
+    action.run.first[:change].should == 0
   end
 
 end

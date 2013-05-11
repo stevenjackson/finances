@@ -23,17 +23,14 @@ class Finances::GetAccountBalanceSheet
 
   def starting(account)
     first_of_month = Date.new @year, @month, 1
-    find_latest_balance_before(account, first_of_month).balance
+    starting_balance = find_latest_balance_before(account, first_of_month)
+    starting_balance and starting_balance.balance or 0
   end
 
   def find_latest_balance_before(account, max_date)
-    @gateway.account_balances(account).reduce do |last_month, balance|
-      if(balance.date < max_date and balance.date > last_month)
-        balance.date
-      else
-        last_month
-      end
-    end
+    @gateway.account_balances(account).select do |balance|
+      balance.date < max_date.to_time
+    end.max_by { |balance| balance.date }
   end
 
   def transaction_total(account)
@@ -48,8 +45,10 @@ class Finances::GetAccountBalanceSheet
 
   def month_transactions(account)
     @gateway.transactions_by_account_id(account.id).select do |transaction|
-      transaction_date = transaction.posted_at.to_date
-      transaction_date.month == @month and transaction_date.year == @year
+      if transaction.posted_at
+        transaction_date = transaction.posted_at.to_date
+        transaction_date.month == @month and transaction_date.year == @year
+      end
     end
   end
 
