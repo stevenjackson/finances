@@ -26,12 +26,17 @@ class TestDatabase
     @db[:transactions].insert :description => "Deposit", :amount => amount
   end
 
-  def insert_account(account, balance)
+  def insert_account(account, balance=0)
     @db[:accounts].insert :name => account, :balance => balance
   end
 
-  def debit_account(account, amount)
+  def debit_account(account, amount, date=Time.now)
     account_id = @db[:accounts][:name => account][:id]
-    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :account_id => account_id
+    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :account_id => account_id, :posted_at => date
+  end
+
+  def store_balance(account, amount, date)
+    account_id = @db[:accounts][:name => account][:id]
+    @db[:account_balances].insert :account_id => account_id, :balance => amount, :date => date
   end
 end
