@@ -1,31 +1,44 @@
-<div class="row">
-  <div class="span4">
-    <table id=categories class="table table-striped">
-      <% @categories.each do |category| %>
-        <tr>
-          <td class='category'><%= category[:category] %></td>
-          <td class='budget'><%= category[:budget] %></td>
-          <td class='spent'><%= category[:spent] %><td>
-          <td class='remainder'><%= category[:remainder] %></td>
-        </tr>
-      <% end %>
-    </table>
+<% provide(:title, this_month_string) %>
+<div class="span8">
+  <div class="row text-center page-header">
+    <h2><small> <%= link_to_prev_month :id => 'previous_month' %> </small>
+      <%= "#{this_month_string}" %>
+      <small><%= link_to_next_month :id => 'next_month' %> </small>
+    </h2>
   </div>
-  <div class="span4">
-    <table id=accounts class="table table-striped">
-      <% @accounts.each do |account| %>
-        <tr>
-          <td class='account'><%= account[:account] %></td>
-          <td class='starting'><%= account[:starting] %></td>
-          <td class='ending'><%= account[:ending] %><td>
-          <td class='change'><%= account[:change] %></td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="row">
+    <div class="span4">
+      <div class ="row text-center">Categories</div>
+      <div class="row">
+      <table id=categories class="table table-striped">
+        <% @categories.each do |category| %>
+          <tr>
+            <td class='category'><%= category[:category] %></td>
+            <td class='budget'><%= category[:budget] %></td>
+            <td class='spent'><%= category[:spent] %><td>
+            <td class='remainder'><%= category[:remainder] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    </div>
+    <div class="span4">
+      <div class ="row text-center">Accounts</div>
+      <div class="row">
+      <table id=accounts class="table table-striped">
+        <% @accounts.each do |account| %>
+          <tr>
+            <td class='account'><%= account[:account] %></td>
+            <td class='starting'><%= account[:starting] %></td>
+            <td class='ending'><%= account[:ending] %><td>
+            <td class='change'><%= account[:change] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    </div>
   </div>
-</div>
-<div row>
-  <div class="span8">
+  <div class="row">
     <table id=totals class="table table-striped">
       <tr>
         <td>Deposits</td>
@@ -34,4 +47,5 @@
         <td id='total_expenses'><%= @totals[:debits] %></td>
       </tr>
     </table>
+  </div>
 </div>

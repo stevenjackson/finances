@@ -52,3 +52,21 @@ end
 Then /^I should see \$(\d+) for expenses this month$/ do |amount|
   visit(MonthPage).total_expenses.should == amount
 end
+
+Given /^I am viewing the (.*) dashboard$/ do |month|
+  dashboard_url = visit(MonthPage).current_url
+  parts = dashboard_url.split('/')
+  parts[-1] = month
+  dashboard_url = parts.join('/')
+  @browser.goto dashboard_url
+end
+
+Then /^I should be able to navigate to the previous (.*) dashboard$/ do |month|
+    on(MonthPage).previous_month
+    on(MonthPage).title.should include month
+end
+
+Then /^I should be able to navigate to the next (.*) dashboard$/ do |month|
+    on(MonthPage).next_month
+    on(MonthPage).title.should include month
+end

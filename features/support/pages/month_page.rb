@@ -6,6 +6,9 @@ class MonthPage
   cell :total_deposits, :id => 'total_deposits'
   cell :total_expenses, :id => 'total_expenses'
 
+  link :previous_month, :id => 'previous_month'
+  link :next_month,     :id => 'next_month'
+
   def budget_for(category)
     category_value category, 'budget'
   end
