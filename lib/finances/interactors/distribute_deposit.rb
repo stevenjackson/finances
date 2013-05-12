@@ -5,12 +5,13 @@ class Finances::DistributeDeposit
   end
 
   def run(params)
+    date_applied = params[:date_applied] || Date.today.next_month.to_time
     credits = params[:credits].map do |credit|
-      Credit.new transaction_id: params[:transaction_id], category: credit[:category], amount: credit[:amount]
+      Credit.new transaction_id: params[:transaction_id], category: credit[:category], amount: credit[:amount], date_applied: date_applied
     end
 
     stored_credits = @gateway.credits.select { |credit| credit.transaction_id == params[:transaction_id] }
-    
+
     to_delete = stored_credits.reject { |credit| credits.include? credit }
     to_save = credits.reject { |credit| stored_credits.include? credit }
 

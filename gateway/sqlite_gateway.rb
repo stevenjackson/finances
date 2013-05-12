@@ -50,7 +50,7 @@ class SqliteGateway
   end
 
   def save_debit(debit)
-    @db[:debits].insert :transaction_id => debit.transaction_id, :category => debit.category, :amount => debit.amount
+    @db[:debits].insert :transaction_id => debit.transaction_id, :category => debit.category, :amount => debit.amount, :date_applied => debit.date_applied
   end
 
   def save_transaction(transaction)
@@ -58,7 +58,7 @@ class SqliteGateway
   end
 
   def save_credit(credit)
-    @db[:credits].insert :transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount
+    @db[:credits].insert :transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount, :date_applied => credit.date_applied
   end
 
   def delete(o)

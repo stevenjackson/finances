@@ -22,7 +22,9 @@ class TransactionController < ApplicationController
     h[:transaction_id] = params[:id]
     params[:category].each_with_index do |category, index|
       amount = params[:amount][index]
-      h[:debits] << { category: category, amount: amount}
+      unless amount.split.empty?
+        h[:debits] << { category: category, amount: amount}
+      end
     end
     SplitTransaction.new(gateway).run(h)
     redirect_to :action => :index

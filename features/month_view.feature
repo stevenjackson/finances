@@ -1,5 +1,4 @@
 Feature: Show finances on a month basis
-
   Scenario:  Show category information
     Given I have a budget of $500 for "groc"
     When I have a credit for $500 in "groc" last month
@@ -39,3 +38,27 @@ Feature: Show finances on a month basis
   Scenario:  Navigate to next year
     Given I am viewing the December dashboard
     Then I should be able to navigate to the next January dashboard
+
+  Scenario:  Deposits default to next month
+   Given I have a deposit for $300
+   When I distribute the deposit
+     | category  | amount |
+     | groc      | 300    |
+   Then I should see $0 for deposits this month
+   And I should see $300 for deposits next month
+
+  Scenario:  Transactions are assigned to the current month be default
+    Given I have a budget of $100 for "groc"
+    And I have a transaction for $35
+    When I assign the transaction to "groc"
+    Then I should see $35 for expenses this month
+
+  Scenario:  Split transactions are assigned to the current month by default
+    Given I have a budget of $100 for "groc"
+    And I have a budget of $15 for "gas"
+    And I have a transaction for $35
+    When I split the transaction
+      | category | amount |
+      | groc     | 20     |
+      | gas      | 15     |
+    Then I should see $35 for expenses this month

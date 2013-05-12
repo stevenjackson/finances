@@ -49,6 +49,11 @@ Then /^I should see \$(\d+) for deposits this month$/ do |amount|
   visit(MonthPage).total_deposits.should == amount
 end
 
+Then /^I should see \$(\d+) for deposits next month$/ do |amount|
+  visit(MonthPage).next_month
+  on(MonthPage).total_deposits.should == amount
+end
+
 Then /^I should see \$(\d+) for expenses this month$/ do |amount|
   visit(MonthPage).total_expenses.should == amount
 end

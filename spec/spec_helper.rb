@@ -4,15 +4,15 @@ require 'rspec'
 include Finances
 
 def this_month
-  Time.new
+  Date.today.to_time
 end
 
 def last_month
-  Time.new.to_date.prev_month.to_time
+  Date.today.prev_month.to_time
 end
 
 def next_month
-  Time.new.to_date.next_month.to_time
+  Date.today.next_month.to_time
 end
 
 def jan_this_year

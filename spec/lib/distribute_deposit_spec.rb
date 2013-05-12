@@ -33,8 +33,18 @@ describe DistributeDeposit do
     action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]
   end
 
-  it "does not updates credits when not needed" do
-    gateway.stub(:credits) { [Credit.new(transaction_id: 1, category: "cat1", amount: 5)] }
+  it "applies to next month by default" do
+    gateway.should_receive(:save) { |credit| credit.date_applied.should == next_month }
+    action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]
+  end
+
+  it "can be applied to different months" do
+    gateway.should_receive(:save) { |credit| credit.date_applied.should == jan_this_year }
+    action.run transaction_id: 1, date_applied: jan_this_year, credits: [ {category: "cat1", amount: 5} ]
+  end
+
+  it "does not update credits when not needed" do
+    gateway.stub(:credits) { [Credit.new(transaction_id: 1, category: "cat1", amount: 5, date_applied: next_month )] }
     gateway.should_not_receive(:delete)
     gateway.should_not_receive(:save)
     action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]

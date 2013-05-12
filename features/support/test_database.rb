@@ -19,7 +19,7 @@ class TestDatabase
   end
 
   def insert_transaction(amount)
-    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}"
+    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :posted_at => Time.now
   end
 
   def insert_deposit(amount)
