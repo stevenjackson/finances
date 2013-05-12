@@ -1,3 +1,4 @@
+require 'spec_helper'
 describe GetBalanceSheetTotals do
 
   let(:gateway) { double 'gateway' }
