@@ -23,7 +23,7 @@ class TestDatabase
   end
 
   def insert_deposit(amount)
-    @db[:transactions].insert :description => "Deposit", :amount => amount
+    @db[:transactions].insert :description => "Deposit", :amount => amount, :posted_at => Time.now
   end
 
   def insert_account(account, balance=0)

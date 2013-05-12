@@ -3,8 +3,11 @@ require 'spec_helper'
 describe DistributeDeposit do
   let(:gateway) { double('gateway') }
   let(:action) { DistributeDeposit.new(gateway) }
+  let(:transaction_date) { jan_this_year }
+  let(:transaction) { Transaction.new posted_at: transaction_date }
 
   before(:each) do
+    gateway.stub(:transaction_by_id) { transaction }
     gateway.stub(:credits) { [] }
   end
 
@@ -33,8 +36,8 @@ describe DistributeDeposit do
     action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]
   end
 
-  it "applies to next month by default" do
-    gateway.should_receive(:save) { |credit| credit.date_applied.should == next_month }
+  it "applies to next month after transaction date by default" do
+    gateway.should_receive(:save) { |credit| credit.date_applied.should == transaction_date.to_date.next_month.to_time }
     action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]
   end
 
@@ -44,9 +47,9 @@ describe DistributeDeposit do
   end
 
   it "does not update credits when not needed" do
-    gateway.stub(:credits) { [Credit.new(transaction_id: 1, category: "cat1", amount: 5, date_applied: next_month )] }
+    gateway.stub(:credits) { [Credit.new(transaction_id: 1, category: "cat1", amount: 5, date_applied: last_month )] }
     gateway.should_not_receive(:delete)
     gateway.should_not_receive(:save)
-    action.run transaction_id: 1, credits: [ {category: "cat1", amount: 5} ]
+    action.run transaction_id: 1, date_applied: last_month, credits: [ {category: "cat1", amount: 5} ]
   end
 end

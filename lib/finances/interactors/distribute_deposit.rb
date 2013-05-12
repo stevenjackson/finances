@@ -1,11 +1,12 @@
 class Finances::DistributeDeposit
   include Finances
+  include TransactionDate
   def initialize(gateway)
     @gateway = gateway
   end
 
   def run(params)
-    date_applied = params[:date_applied] || Date.today.next_month.to_time
+    date_applied = params[:date_applied] || transaction_date(params).to_date.next_month.to_time 
     credits = params[:credits].map do |credit|
       Credit.new transaction_id: params[:transaction_id], category: credit[:category], amount: credit[:amount], date_applied: date_applied
     end
