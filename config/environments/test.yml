@@ -1,5 +1,7 @@
 base_url: http://localhost:9393
 default_datasource: sqlite
+import_folder: gateway/data/import
 
 sqlite:
   file: test.sqlite
+  relative_path: gateway/data/test.sqlite
