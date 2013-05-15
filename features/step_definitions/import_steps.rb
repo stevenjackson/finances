@@ -1,5 +1,5 @@
 Given /^there is a file to be imported$/ do
-
+  TransactionsFile.write
 end
 
 When /^I wait long enough for it to be imported$/ do
