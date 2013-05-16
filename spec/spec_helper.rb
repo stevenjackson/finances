@@ -1,5 +1,8 @@
 require 'finances'
 require 'rspec'
+require 'date'
+require 'fileutils'
+require 'import_files'
 
 include Finances
 
