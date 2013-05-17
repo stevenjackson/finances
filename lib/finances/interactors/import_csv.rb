@@ -8,7 +8,7 @@ class Finances::ImportCsv
 
   def run(params)
     @file_path = params[:file]
-    @account_id = @gateway.account_by_name(params[:account]).id
+    @account_id = params[:account_id]
     @transactions = []
     csv = CSV.foreach(@file_path) { |line| read_line line }
     save

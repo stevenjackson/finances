@@ -18,13 +18,12 @@ describe ImportCsv do
   end
 
   before(:each) do
-    gateway.stub(:account_by_name) { Account.new(1, 'checking') }
     gateway.stub(:save)
     gateway.stub(:transactions_by_account_id) {[]}
   end
 
   it "finds a file to import" do
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
     action.should be_file_loaded
   end
 
@@ -39,17 +38,17 @@ describe ImportCsv do
   end
 
   it "finds transactions" do
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
     action.transactions.count.should == 3
   end
 
   it "saves transactions" do
     gateway.should_receive(:save).with(kind_of(Transaction)).exactly(3).times
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
   end
 
   it "saves all the data" do
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
     t = action.transactions.first
     t.id.should be_nil
     t.description.should == "ENERGY Bill Payment"
@@ -63,18 +62,18 @@ describe ImportCsv do
   end
 
   it "doesn't store dupes" do
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
     gateway.stub(:transactions_by_account_id) do
       action.transactions.map{ |t| Transaction.new(t.to_h) }
     end
     gateway.should_receive(:save).never
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
   end
 
   it "doesn't count other accounts as dupes" do
-    action.run account: 'checking', file: test_file
+    action.run account_id: 1, file: test_file
     gateway.should_receive(:save)
-    action.run account: 'savings', file: test_file
+    action.run account_id: 2, file: test_file
   end
 
 end

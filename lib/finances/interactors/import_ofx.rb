@@ -7,7 +7,7 @@ class Finances::ImportOfx
 
   def run(params)
     @file_path = params[:file]
-    @account_id = @gateway.account_by_name(params[:account]).id
+    @account_id = params[:account_id]
     @transactions = []
     ofx = OFX @file_path
     ofx.account.transactions.each do |t|
