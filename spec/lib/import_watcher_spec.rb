@@ -2,47 +2,45 @@ require 'spec_helper'
 include ImportFiles
 
 describe ImportWatcher do
-  let(:gateway) { double 'gateway' }
-  let(:action) { ImportWatcher.new gateway }
 
-  before(:all) { }
-  after(:all) { }
+  before(:all) do
+    FileUtils.mkdir_p 'import/archive'
+    latch = CountDownLatch.new 1
+    @action = ImportWatcher.new nil
+    @action.run import_path: 'import'
+    @action.callback = lambda do |modified, added, removed| 
+      @added = added
+      latch.countdown!
+    end
+    FileUtils.touch 'import/test.csv'
+    FileUtils.touch 'import/test.ofx'
+    FileUtils.touch 'import/test.qif'
+    FileUtils.touch 'import/test.qfx'
+    FileUtils.touch 'import/archive/archive.csv'
+    latch.wait 2
 
-  before(:each) do
-    gateway.stub(:account_by_name) { Account.new(1, 'checking') }
-    gateway.stub(:transactions_by_account_id) { [] }
-    gateway.stub(:save)
-    FileUtils.mkdir_p 'import/checking' 
-    action.run import_path: 'import'
+    @added.map! { |f| Pathname.new(f).basename.to_s }
   end
 
-  after(:each) do
-    action.stop
+  after(:all) do
+    @action.stop
     FileUtils.rm_rf 'import'
   end
 
-  it "determines the account transactions belong to by directory name" do
-    gateway.should_receive(:account_by_name).with('checking')
-    File.open('import/checking/test.csv', 'w') {|f| f.write csv_file }
-    sleep(0.5)
+  it "notices csv" do
+    @added.should include 'test.csv'
   end
 
-  it "saves new transactions" do
-    gateway.should_receive(:save).exactly(3).times.with(kind_of(Transaction))
-    File.open('import/checking/test.csv', 'w') {|f| f.write csv_file }
-    sleep(0.5)
+  it "notices ofx" do
+    @added.should include 'test.ofx'
   end
 
-  it "handles ofx files" do
-    gateway.should_receive(:account_by_name).with('checking')
-    gateway.should_receive(:save).exactly(2).times.with(kind_of(Transaction))
-    File.open('import/checking/test.ofx', 'w') {|f| f.write ofx_file }
-    sleep(0.5)
+  it "doesn't notice other types" do
+    @added.should_not include 'test.qif'
+    @added.should_not include 'test.qfx'
   end
 
-  it "ignores other files" do
-    gateway.should_not_receive(:account_by_name)
-    File.open('import/checking/test.qif', 'w') {|f| f.write ofx_file }
-    sleep(0.5)
+  it "ignores archived files" do
+    @added.should_not include 'archive.csv'
   end
 end

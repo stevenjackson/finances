@@ -3,6 +3,7 @@ require 'rspec'
 require 'date'
 require 'fileutils'
 require 'import_files'
+require 'countdownlatch'
 
 include Finances
 
