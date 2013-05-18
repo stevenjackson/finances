@@ -10,6 +10,10 @@ Before do
   @database = TestDatabase.new
 end
 
+After do
+  TransactionsFile.delete
+end
+
 def browser(tag=nil)
   return $browser unless $browser.nil?
 

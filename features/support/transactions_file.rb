@@ -1,5 +1,7 @@
 class TransactionsFile
   def self.write
+    FileUtils.mkdir_p IMPORT_FOLDER
+
     File.open(new.path, 'w') do |f|
       f.write new.file_contents
     end
@@ -11,7 +13,7 @@ class TransactionsFile
   end
 
   def path
-    "#{FigNewton.import_folder}/test.csv"
+    "#{IMPORT_FOLDER}/test.csv"
   end
 
   def file_contents

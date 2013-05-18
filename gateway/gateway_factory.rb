@@ -1,11 +1,12 @@
-require 'require_all'
 require 'fig_newton'
+require 'require_all'
 require_rel '*.rb'
 module GatewayFactory
   class << self
+    include EnvironmentLoader
+
     def create(environment)
-      FigNewton.yml_directory = find_path '..', 'config', 'environments'
-      FigNewton.load "#{environment}.yml"
+      load_env environment
       ds = FigNewton.default_datasource
       self.send ds, FigNewton.send(ds).to_hash
     end
@@ -18,8 +19,5 @@ module GatewayFactory
       SqliteGateway.new url 
     end
 
-    def find_path(*args)
-      File.join(File.expand_path(File.dirname(__FILE__)), *args)
-    end
   end
 end
