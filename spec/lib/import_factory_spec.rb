@@ -1,9 +1,9 @@
 require 'spec_helper'
 include ImportFiles
 
-describe ImportFactory do
+describe ImportTransactionFile do
   let(:gateway) { double 'gateway' }
-  let(:action) { ImportFactory.new gateway }
+  let(:action) { ImportTransactionFile.new gateway }
 
   before(:all) do
     @test_csv = 'import/checking/test.csv'

@@ -37,7 +37,7 @@ class Finances::ImportWatcher
 
   def import(file)
     begin
-      ImportFactory.new(@gateway).run file: file
+      ImportTransactionFactory.new(@gateway).run file: file
     rescue => e
       puts "Error during import of #{file}"
       puts "#{$!}"
