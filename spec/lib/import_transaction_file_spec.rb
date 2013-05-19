@@ -11,8 +11,6 @@ describe ImportTransactionFile do
     @ignored_file = 'import/checking/test.qif'
 
     FileUtils.mkdir_p 'import/checking' 
-    File.open(@test_csv, 'w') {|f| f.write csv_file }
-    File.open(@test_ofx, 'w') {|f| f.write ofx_file }
   end
 
   after(:all) do
@@ -20,6 +18,8 @@ describe ImportTransactionFile do
   end
 
   before(:each) do
+    File.open(@test_csv, 'w') {|f| f.write csv_file }
+    File.open(@test_ofx, 'w') {|f| f.write ofx_file }
     gateway.stub(:account_by_name) { Account.new(1, 'checking') }
     gateway.stub(:transactions_by_account_id) { [] }
     gateway.stub(:save)
@@ -44,5 +44,12 @@ describe ImportTransactionFile do
   it "ignores other files" do
     gateway.should_not_receive(:account_by_name)
     action.run file: @ignored_file
+  end
+
+  it "archives files after import" do
+    action.run file: @test_csv
+    File.exist?(@test_csv).should be_false
+    archive_csv = @test_csv.insert(@test_csv.index('/checking/'), '/archive')
+    File.exist?(archive_csv).should be_true
   end
 end
