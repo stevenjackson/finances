@@ -73,7 +73,7 @@ class SqliteGateway
   end
 
   def account_by_name(name)
-    @db[:accounts][:name => name]
+    r = @db[:accounts][:name => name]
     Account.new r[:id], r[:name], r[:balance]
   end
 
