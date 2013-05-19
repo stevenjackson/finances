@@ -18,6 +18,8 @@ World(PageObject::PageFactory)
 World(TimeHelper)
 FigNewton.load "test.yml"
 
-
-DB_URI = "sqlite://#{FigNewton.sqlite.relative_path}"
-IMPORT_FOLDER = FigNewton.import_folder_relative_path
+unless defined? CONSTANTS
+  CONSTANTS = ''
+  DB_URI = "sqlite://#{FigNewton.sqlite.relative_path}"
+  IMPORT_FOLDER = FigNewton.import_folder_relative_path
+end
