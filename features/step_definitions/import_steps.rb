@@ -1,9 +1,6 @@
 Given /^there is a file to be imported$/ do
-  TransactionsFile.write
-end
-
-When /^I wait long enough for it to be imported$/ do
-
+  @database.insert_account('checking', 0)
+  @transactions_file.write 'checking'
 end
 
 Then /^I will see transactions$/ do

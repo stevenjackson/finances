@@ -1,19 +1,18 @@
 class TransactionsFile
-  def self.write
-    FileUtils.mkdir_p IMPORT_FOLDER
 
-    File.open(new.path, 'w') do |f|
-      f.write new.file_contents
+  def write(account)
+    @path = "#{IMPORT_FOLDER}/#{account}"
+    @file_name = "#{@path}/test.csv"
+
+    FileUtils.mkdir_p @path
+
+    File.open(@file_name, 'w') do |f|
+      f.write file_contents
     end
   end
 
-  def self.delete
-    path = new.path
-    File.delete path if File.exists? path
-  end
-
-  def path
-    "#{IMPORT_FOLDER}/test.csv"
+  def delete
+    FileUtils.rm_rf @path if @path
   end
 
   def file_contents

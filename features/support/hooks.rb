@@ -8,10 +8,11 @@ end
 Before do
   @browser = browser
   @database = TestDatabase.new
+  @transactions_file = TransactionsFile.new
 end
 
 After do
-  TransactionsFile.delete
+  @transactions_file.delete
 end
 
 def browser(tag=nil)
