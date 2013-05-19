@@ -5,6 +5,10 @@ module EnvironmentLoader
     FigNewton.load "#{environment}.yml"
   end
 
+  def data_path(*args)
+    find_path 'data', args
+  end
+
   def find_path(*args)
     File.join(File.expand_path(File.dirname(__FILE__)), *args)
   end

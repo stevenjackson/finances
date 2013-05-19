@@ -14,7 +14,7 @@ module GatewayFactory
     def sqlite(params)
       url = params['url']
       unless url
-        url = "sqlite://#{find_path 'data', params['file']}"
+        url = "sqlite://#{data_path params['file']}"
       end
       SqliteGateway.new url 
     end
