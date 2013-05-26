@@ -36,6 +36,8 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
+  config.ssh.forward_agent = true
+
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding 
   # some recipes and/or roles.
@@ -44,11 +46,13 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = "cookbooks"
     chef.add_recipe "build-essential"
     chef.add_recipe "git"
+    chef.add_recipe "apt"
     chef.add_recipe "rvm::vagrant"
     chef.add_recipe "rvm::system"
 
     chef.json = {
       'rvm' => {
+        'rubies' => [ "2.0.0-p0", "2.0.0-p195"],
         'global_gems'  => [
             {'name'    => 'bundler'},
             {'name'    => 'rake'}
