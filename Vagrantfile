@@ -49,6 +49,7 @@ Vagrant::Config.run do |config|
     chef.add_recipe "apt"
     chef.add_recipe "rvm::vagrant"
     chef.add_recipe "rvm::system"
+    chef.add_recipe "nodejs"
 
     chef.json = {
       'rvm' => {
@@ -58,7 +59,7 @@ Vagrant::Config.run do |config|
             {'name'    => 'rake'}
         ],
         'vagrant' => {
-            'system_chef_solo' => '/usr/bin/chef-solo'
+            'system_chef_solo' => '/opt/vagrant_ruby/bin/chef-solo'
         },
         'group_users' => [ "vagrant" ]
       }
