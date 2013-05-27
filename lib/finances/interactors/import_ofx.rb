@@ -37,7 +37,7 @@ class Finances::ImportOfx
 
   def save
     account_transactions = @gateway.transactions_by_account_id(@account_id)
-    fit_ids = account_transactions.map { |t| t.fit_id }
+    fit_ids = account_transactions.map(&:fit_id)
     unknown_transactions = transactions.reject { |t| fit_ids.include? t.fit_id  }
     unknown_transactions.each { |t| @gateway.save(t) }
   end

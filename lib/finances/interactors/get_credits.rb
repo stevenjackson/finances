@@ -4,6 +4,6 @@ class Finances::GetCredits
   end
 
   def run(params)
-    @gateway.credits.select {|c| c.transaction_id == params[:transaction_id] }.map { |c| c.to_h }
+    @gateway.credits.select {|c| c.transaction_id == params[:transaction_id] }.map(&:to_h)
   end
 end

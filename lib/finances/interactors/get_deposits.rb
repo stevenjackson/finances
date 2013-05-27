@@ -4,6 +4,6 @@ class Finances::GetDeposits
   end
 
   def run
-    @gateway.transactions.select{|t| t.credit? }.map {|t| t.to_h }
+    @gateway.transactions.select(&:credit?).map(&:to_h)
   end
 end
