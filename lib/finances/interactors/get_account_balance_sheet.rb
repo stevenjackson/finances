@@ -6,19 +6,18 @@ class Finances::GetAccountBalanceSheet
 
   def run(params={})
     @month, @year = parse_date params
-    accounts.map do |a|
-    {
-        account:  a.name,
-        starting: starting(a),
-        change:   transaction_total(a)
-    }
-    end.each do |h|
-      h[:ending] = h[:starting] + h[:change]
-    end 
+    @gateway.accounts.map {|a| account_data(a) }
   end
 
-  def accounts
-    @gateway.accounts
+  def account_data(account)
+    start = starting(account)
+    change = transaction_total(account)
+    {
+        account:  account.name,
+        starting: start,
+        change: change,
+        ending: start + change
+    }
   end
 
   def starting(account)
