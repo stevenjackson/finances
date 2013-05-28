@@ -21,4 +21,8 @@ class Finances::Transaction
   def credit?
     self.type == :credit
   end
+
+  def debit?
+    self.type == :debit
+  end
 end

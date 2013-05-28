@@ -13,8 +13,9 @@ class Finances::GetAccountBalances
 
   def balance(account)
     transactions = @gateway.transactions.select { |t| account.id == t.account_id }
-    credit_total = transactions.select{ |t| t.type == :credit }.reduce(0){ |sum, t| sum + t.amount}
-    debit_total = transactions.select{ |t| t.type == :debit }.reduce(0){ |sum, t| sum + t.amount}
+
+    credit_total = transactions.select(&:credit?).map(&:amount).reduce(0, :+)
+    debit_total = transactions.select(&:debit?).map(&:amount).reduce(0, :+)
     account.balance - debit_total + credit_total
   end
 end
