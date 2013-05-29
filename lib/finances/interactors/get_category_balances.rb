@@ -11,8 +11,12 @@ class Finances::GetCategoryBalances
   end
 
   def calculate_balance(category)
-    total_spent = @gateway.debits.select { |debit| category.name == debit.category }.reduce(0){ |sum, debit| sum + debit.amount}
-    total_deposited = @gateway.credits.select { |credit| category.name == credit.category }.reduce(0){ |sum, credit| sum + credit.amount}
+    total_spent = by_category(@gateway.debits, category).map(&:amount).reduce(0, :+)
+    total_deposited = by_category(@gateway.credits, category).map(&:amount).reduce(0, :+)
     category.budget - total_spent + total_deposited
+  end
+
+  def by_category(items, category)
+    items.select { |i| category.name == i.category }
   end
 end

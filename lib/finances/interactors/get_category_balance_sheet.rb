@@ -6,25 +6,35 @@ class Finances::GetCategoryBalanceSheet
 
   def run(params={})
     @month, @year = parse_date params
-    categories.map do |c|
-    {
-        category: c.name,
-        spent: amount_spent(c),
-        budget: c.budget,
-        remainder: amount_added(c) - amount_spent(c)
-    }
-    end 
+    categories.map { |c| balance(c) }
   end
 
   def categories()
     @gateway.categories
   end
 
+  def balance(category)
+    {
+        category: category.name,
+        spent: amount_spent(category),
+        budget: category.budget,
+        remainder: amount_added(category) - amount_spent(category)
+    }
+  end
+
   def amount_spent(category)
-    @gateway.debits.select{ |d| d.matches?(category.name, @month, @year) }.reduce(0) { |sum, d| sum + d.amount }
+    total(@gateway.debits, category)
   end
 
   def amount_added(category)
-    @gateway.credits.select{ |c| c.matches?(category.name, @month, @year) }.reduce(0) { |sum, c| sum + c.amount }
+    total(@gateway.credits, category)
+  end
+
+  def total(items, category)
+    by_month(items, category).map(&:amount).reduce(0, :+)
+  end
+
+  def by_month(items, category)
+    items.select { |i| i.matches? category.name, @month, @year }
   end
 end

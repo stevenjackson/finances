@@ -8,14 +8,18 @@ class Finances::GetBalanceSheetTotals
   def run(params={})
     @month, @year = parse_date params
 
-    { debits: total_debits, credits: total_credits }
+    { debits: debit_balance, credits: credit_balance }
   end
 
-  def total_debits
-    @gateway.debits.select { |debit| debit.in_month?(@month, @year) }.reduce(0) { |sum, debit| sum += debit.amount }
+  def debit_balance
+    total @gateway.debits
   end
 
-  def total_credits
-    @gateway.credits.select { |credit| credit.in_month?(@month, @year) }.reduce(0) { |sum, credit| sum += credit.amount }
+  def credit_balance
+    total @gateway.credits
+  end
+
+  def total(items)
+    items.select { |item| item.in_month?(@month, @year) }.map(&:amount).reduce(0, :+)
   end
 end
