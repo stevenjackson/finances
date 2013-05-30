@@ -17,3 +17,8 @@ When(/^I split the transaction$/) do |table|
   end
   on(SplitTransactionPage).save
 end
+
+Then /^I should see (\d+) unsorted transactions for "(.*?)" totaling \$(\d+)$/ do |number, account, amount|
+  visit(DashboardPage).unsorted_transactions_count(account).should == number.to_i
+  on(DashboardPage).unsorted_transactions_amount(account).should == amount.to_i
+end

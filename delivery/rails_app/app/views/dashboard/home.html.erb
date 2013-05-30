@@ -6,6 +6,12 @@
           <td><div><%=key%></div></td>
           <td><div id=<%=key%>_balance><%=value%></div></td>
         </tr>
+        <% if @unsorted_transactions[key] %>
+          <% text = "#{key} has #{@unsorted_transactions[key][:count]} unsorted transactions totaling $#{@unsorted_transactions[key][:amount]}" %>
+          <tr>
+            <td colspan=2><div id=<%=key%>_unsorted><%=text%></div></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>

@@ -10,3 +10,10 @@ Feature:  Show a dashboard with current financial stats
     Given I have a "checking" account with a balance of $100
     When I spend $20 from "checking"
     Then I should see $80 for "checking"
+
+  @guard
+  Scenario:  Show unsorted transaction totals
+    Given I have a "checking" account with a balance of $100
+    Given I spend $20 from "checking"
+    And I spend $15 from "checking"
+    Then I should see 2 unsorted transactions for "checking" totaling $35
