@@ -1,49 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-  # Every Vagrant virtual environment requires a box to build off of.
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise32"
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-
-  # Boot with a GUI so you can see the screen. (Default is headless)
-  # config.vm.boot_mode = :gui
-
-  # Assign this VM to a host-only network IP, allowing you to access it
-  # via the IP. Host-only networks can talk to the host machine as well as
-  # any other machines on the same network, but cannot be accessed (through this
-  # network interface) by any external networks.
-  # config.vm.network :hostonly, "192.168.33.10"
-
-  # Assign this VM to a bridged network, allowing you to connect directly to a
-  # network using the host's network device. This makes the VM appear as another
-  # physical device on your network.
-  # config.vm.network :bridged
-
-  # Forward a port from the guest to the host, which allows for outside
-  # computers to access the VM, whereas host only networking does not.
-  # config.vm.forward_port 80, 8080
-
-  # Share an additional folder to the guest VM. The first argument is
-  # an identifier, the second is the path on the guest to mount the
-  # folder, and the third is the path on the host to the actual folder.
-  # config.vm.share_folder "v-data", "/vagrant_data", "../data"
-
-  config.ssh.forward_agent = true
-
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding 
-  # some recipes and/or roles.
+  config.berkshelf.enabled = true
+  config.omnibus.chef_version = :latest
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "cookbooks"
     chef.add_recipe "build-essential"
     chef.add_recipe "git"
     chef.add_recipe "apt"
@@ -53,13 +20,14 @@ Vagrant::Config.run do |config|
 
     chef.json = {
       'rvm' => {
-        'rubies' => [ "2.0.0-p0", "2.0.0-p195"],
+        'default_ruby' => 'ruby-2.0.0-p247',
+        'user_default_ruby' => 'ruby-2.0.0-p247',
         'global_gems'  => [
             {'name'    => 'bundler'},
             {'name'    => 'rake'}
         ],
         'vagrant' => {
-            'system_chef_solo' => '/opt/vagrant_ruby/bin/chef-solo'
+          'system_chef_solo' => '/usr/bin/chef-solo'
         },
         'group_users' => [ "vagrant" ]
       }
