@@ -22,6 +22,3 @@ gem 'jquery-rails'
 
 gem 'finances', :path => '../../'
 gem 'finances_data', :path => '../../gateway'
-
-#Old ofx is no longer being maintained and uses iconv
-gem 'ofx', :git => 'git@github.com:floehopper/ofx.git'
