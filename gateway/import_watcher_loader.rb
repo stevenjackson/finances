@@ -10,6 +10,6 @@ module ImportWatcherLoader
 
     watcher = ImportWatcher.new(gateway)
     watcher.run import_path: import_path
-    watcher.start!
+    sleep
   end
 end

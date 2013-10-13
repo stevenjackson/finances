@@ -23,15 +23,6 @@ class Finances::ImportWatcher
     end
   end
 
-  def start!
-    stop
-    begin
-      @listener.start!
-    rescue Interrupt
-      puts "Watcher stopping"
-    end
-  end
-
   def callback
     @handler ||= default_callback
     filterer
