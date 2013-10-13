@@ -1,22 +1,26 @@
 require 'listen'
 
 class Finances::ImportWatcher
+
+  FILTERS = [/\.csv$/, /\.ofx$/]
+
   def initialize(gateway)
     @gateway = gateway
   end
 
   def run(params={})
-    @listener = Listen.to(params[:import_path], relative_paths: false)
-      .filter(/\.csv$/, /\.ofx$/)
-      .ignore(%r{archive})
-      .change(&callback)
+    @listener = Listen.to(params[:import_path], ignore: %r{archive}, &callback)
 
       puts "Now watching #{params[:import_path]}"
     @listener.start
   end
 
   def stop
-    @listener.stop
+    begin
+      @listener.stop
+    rescue SystemExit
+      puts "Watcher stopping"
+    end
   end
 
   def start!
@@ -29,9 +33,26 @@ class Finances::ImportWatcher
   end
 
   def callback
+    @handler ||= default_callback
+    filterer
+  end
+
+  def default_callback
     Proc.new do |modified, added, removed |
       modified.each { |f| import f }
       added.each { |f| import f }
+    end
+  end
+
+  def filterer
+    Proc.new do |modified, added, removed|
+      @handler.call(filter(modified), filter(added), filter(removed))
+    end
+  end
+
+  def filter(files)
+    files.select do |file|
+      FILTERS.any? { |filter| filter =~ file } 
     end
   end
 
@@ -47,7 +68,7 @@ class Finances::ImportWatcher
   end
 
   def callback=(handler)
-    @listener.change &handler
+    @handler = handler
   end
 
 end
