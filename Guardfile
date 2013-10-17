@@ -5,17 +5,14 @@ notification :tmux,
   :line_separator => ' > ', # since we are single line we need a separator
   :color_location => 'status-left-bg' # to customize which tmux element will change color
 
-guard 'spork', :rspec => false, :cucumber_env => { 'RAILS_ENV' => 'test' } do 
-end
-
 group :tests, :halt_on_fail => true  do
-  guard 'rspec', :cli => '--color --format Fuubar' do
+  guard :rspec, :cmd => 'rspec --color --format Fuubar' do
     watch(%r{^spec/.+_spec\.rb$})
     watch(%r{^lib/(.+)\.rb$})     { "spec" } 
     watch('spec/spec_helper.rb')  { "spec" }
   end
 
-  guard 'cucumber', :cli => '--drb --profile guard', :notification => true, :all_after_pass => false do
+  guard 'cucumber', :cli => '--profile guard', :notification => true, :all_after_pass => false do
     watch(%r{^features/.+$})                  { "features" }
     watch(%r{^lib/.+\.rb$})                   { "features" }
     watch(%r{^cucumber.yml$})                 { "features" }
@@ -23,3 +20,4 @@ group :tests, :halt_on_fail => true  do
     watch(%r{^gateway/.+rb$})                 { "features" }
   end
 end
+
