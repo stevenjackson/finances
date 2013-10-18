@@ -6,7 +6,7 @@ notification :tmux,
   :color_location => 'status-left-bg' # to customize which tmux element will change color
 
 group :tests, :halt_on_fail => true  do
-  guard :rspec, :cmd => 'rspec --color --format Fuubar' do
+  guard :rspec, :cmd => 'rspec --color --format Fuubar', :all_on_start => true do
     watch(%r{^spec/.+_spec\.rb$})
     watch(%r{^lib/(.+)\.rb$})     { "spec" } 
     watch('spec/spec_helper.rb')  { "spec" }
