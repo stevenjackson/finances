@@ -20,6 +20,8 @@ def browser(tag=nil)
 
   if('@guard' == tag)
     $browser = Watir::Browser.new :phantomjs
+  elsif ENV['PHANTOM']
+    $browser = Watir::Browser.new :phantomjs
   else
     $browser = Watir::Browser.new :firefox
   end
