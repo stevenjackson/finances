@@ -3,6 +3,8 @@ class DashboardPage
 
   page_url FigNewton.base_url
 
+  link(:getting_started, :text => 'Getting Started')
+
   def balance(category)
     div_element(:id => "#{category}_balance").text
   end
