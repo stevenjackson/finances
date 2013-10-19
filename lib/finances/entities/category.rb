@@ -1,2 +1,6 @@
-Finances::Category = Struct.new(:name, :budget) do
+class Finances::Category
+  include Finances::HashTranslator
+
+  attr_accessor :name, :budget
+
 end

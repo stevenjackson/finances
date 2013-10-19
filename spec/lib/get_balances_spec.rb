@@ -5,7 +5,7 @@ describe GetCategoryBalances do
   let(:action) { GetCategoryBalances.new gateway  }
 
   before(:each) do
-    gateway.stub(:categories) { [Category.new('stuff', 100)] }
+    gateway.stub(:categories) { [Category.new(name: 'stuff', budget: 100)] }
     gateway.stub(:debits) { [] }
     gateway.stub(:credits) { [] }
   end

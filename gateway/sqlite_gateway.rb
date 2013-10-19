@@ -8,7 +8,7 @@ class SqliteGateway
 
   def categories
     @db[:categories].map do |r|
-      Category.new r[:name], r[:budget]
+      Category.new r.to_h.keep_if { |key, value| Category.method_defined? key }
     end
   end
 

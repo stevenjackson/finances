@@ -8,7 +8,7 @@ describe GetCategoryBalanceSheet do
   let(:credit) { Credit.new category: 'stuff', amount: 100 }
 
   before(:each) do
-    gateway.stub(:categories) { [Category.new('stuff', 100)] }
+    gateway.stub(:categories) { [Category.new(name: 'stuff', budget: 100)] }
     gateway.stub(:debits) { [debit]  }
     gateway.stub(:credits) { [credit] }
   end
