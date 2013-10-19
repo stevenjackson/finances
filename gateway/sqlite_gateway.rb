@@ -7,35 +7,27 @@ class SqliteGateway
   end
 
   def categories
-    @db[:categories].map do |r|
-      Category.new r.to_h.keep_if { |key, value| Category.method_defined? key }
-    end
+    load_objects @db[:categories], Category
   end
 
   def debits
-    @db[:debits].map do |r|
-      Debit.new r.to_h.keep_if { |key, value| Debit.method_defined? key }
-    end
+    load_objects @db[:debits], Debit
   end
 
   def credits
-    @db[:credits].map do |r|
-      Credit.new r.to_h.keep_if { |key, value| Credit.method_defined? key }
-    end
+    load_objects @db[:credits], Credit
   end
 
   def accounts
-    @db[:accounts].map do |r|
-      Account.new r.to_h.keep_if { |key, value| Account.method_defined? key }
-    end
+    load_objects @db[:accounts], Account
   end
 
   def transactions
-    @db[:transactions].map { |r| to_transaction r }
+    load_objects @db[:transactions], Transaction
   end
 
   def transaction_by_id(id)
-    to_transaction @db[:transactions][:id => id]
+    to_object @db[:transactions][:id => id], Transaction
   end
 
   def save(o)
@@ -79,12 +71,11 @@ class SqliteGateway
   end
 
   def account_by_name(name)
-    r = @db[:accounts][:name => name]
-    Account.new r[:id], r[:name], r[:balance]
+    to_object @db[:accounts][:name => name], Account
   end
 
   def transactions_by_account_id(account_id)
-    @db[:transactions].filter(:account_id => account_id).map { |r| to_transaction r }
+    load_objects @db[:transactions].filter(:account_id => account_id), Transaction
   end
 
   def account_balances(account)
@@ -95,9 +86,13 @@ class SqliteGateway
   end
 
   private
-  def to_transaction(r)
+  def load_objects(enum, clazz)
+    enum.map { |r| to_object r, clazz }
+  end
+
+  def to_object(r, clazz)
     return if r.nil?
 
-    Transaction.new r.to_h 
+    clazz.new r.to_h.keep_if { |key, value| clazz.method_defined? key }
   end
 end
