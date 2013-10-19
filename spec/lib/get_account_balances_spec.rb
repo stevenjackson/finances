@@ -7,7 +7,7 @@ describe GetAccountBalances do
   let(:credit) { Transaction.new(account_id: 1, amount: 30 ) }
 
   before(:each) do
-    gateway.stub(:accounts) { [Account.new(1, 'checking', 100)] }
+    gateway.stub(:accounts) { [Account.new(id: 1, name: 'checking', balance: 100)] }
   end
 
 

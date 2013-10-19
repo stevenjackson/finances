@@ -9,6 +9,8 @@ RailsApp::Application.routes.draw do
     end
   end
   resources :deposit
+  get '/admin' => 'admin#index'
+  post '/admin' => 'admin#save'
 
   get '/:month(/:year)' => 'dashboard#month'
   root to: 'dashboard#home'

@@ -1,0 +1,33 @@
+<div class="row">
+  <%= form_tag do %>
+    <div class="span4">
+      <table id=accounts class="table table-striped">
+        <% @accounts.each_pair do |key, value| %>
+          <tr>
+            <td><div><%=key%></div></td>
+            <td><div id=<%=key%>_balance><%=value%></div></td>
+          </tr>
+        <% end %>
+      </table>
+      <table>
+        <tr>
+          <td><div>Account: </div></td>
+          <td><%= text_field_tag(:new_account_name) %></td>
+          <td><div>$</div></td>
+          <td><%= text_field_tag(:new_account_balance) %></td>
+        </tr>
+        <tr><td><%= submit_tag "Add Account", class: "btn"  %></td></tr>
+      </table>
+    </div>
+    <div class="span4">
+      <table id=category_balances class="table table-striped">
+        <% @balances.each_pair do |key, value| %>
+          <tr>
+            <td><div><%=key%></div></td>
+            <td><div id=<%=key%>_balance><%=value%></div></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>

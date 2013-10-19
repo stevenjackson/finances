@@ -20,7 +20,7 @@ describe ImportTransactionFile do
   before(:each) do
     File.open(@test_csv, 'w') {|f| f.write csv_file }
     File.open(@test_ofx, 'w') {|f| f.write ofx_file }
-    gateway.stub(:account_by_name) { Account.new(1, 'checking') }
+    gateway.stub(:account_by_name) { Account.new(id: 1, name: 'checking') }
     gateway.stub(:transactions_by_account_id) { [] }
     gateway.stub(:save)
   end

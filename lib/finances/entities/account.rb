@@ -1,2 +1,6 @@
-Finances::Account = Struct.new(:id, :name, :balance) do
+class Finances::Account
+  include Finances::HashTranslator
+
+  attr_accessor :id, :name, :balance
+
 end

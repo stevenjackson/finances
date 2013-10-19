@@ -2,7 +2,7 @@ describe GetAccountBalanceSheet do
 
   let(:gateway) { double 'gateway' }
   let(:action) { GetAccountBalanceSheet.new(gateway) }
-  let(:checking) { Account.new 1, 'checking' }
+  let(:checking) { Account.new id: 1, name: 'checking' }
   let(:checking_balance) { AccountBalance.new :account => checking }
   let(:transaction) { Transaction.new :account_id => 1, :amount => -50}
 

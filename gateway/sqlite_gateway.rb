@@ -26,7 +26,7 @@ class SqliteGateway
 
   def accounts
     @db[:accounts].map do |r|
-      Account.new r[:id], r[:name], r[:balance]
+      Account.new r.to_h.keep_if { |key, value| Account.method_defined? key }
     end
   end
 
@@ -46,6 +46,8 @@ class SqliteGateway
       save_transaction o
     when Credit
       save_credit o
+    when Account
+      save_account o
     end
   end
 
@@ -59,6 +61,10 @@ class SqliteGateway
 
   def save_credit(credit)
     @db[:credits].insert :transaction_id => credit.transaction_id, :category => credit.category, :amount => credit.amount, :date_applied => credit.date_applied
+  end
+
+  def save_account(account)
+    @db[:accounts].insert :name => account.name, :balance => account.balance
   end
 
   def delete(o)
