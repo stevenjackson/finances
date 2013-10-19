@@ -40,6 +40,8 @@ class SqliteGateway
       save_credit o
     when Account
       save_account o
+    when Category
+      save_category o
     end
   end
 
@@ -57,6 +59,10 @@ class SqliteGateway
 
   def save_account(account)
     @db[:accounts].insert :name => account.name, :balance => account.balance
+  end
+
+  def save_category(category)
+    @db[:categories].insert :name => category.name, :budget => category.budget
   end
 
   def delete(o)

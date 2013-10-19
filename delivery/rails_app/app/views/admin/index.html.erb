@@ -28,6 +28,15 @@
           </tr>
         <% end %>
       </table>
+      <table>
+        <tr>
+          <td><div>Category: </div></td>
+          <td><%= text_field_tag(:new_category_name) %></td>
+          <td><div>$</div></td>
+          <td><%= text_field_tag(:new_category_budget) %></td>
+        </tr>
+        <tr><td><%= submit_tag "Add Category", class: "btn"  %></td></tr>
+      </table>
     </div>
   <% end %>
 </div>
