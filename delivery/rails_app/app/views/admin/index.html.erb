@@ -1,6 +1,7 @@
-<div class="row">
-  <%= form_tag do %>
-    <div class="span4">
+<%= form_tag do %>
+  <div class="row">
+    <div class="span8">
+      <h2>Accounts</h2>
       <table id=accounts class="table table-striped">
         <% @accounts.each_pair do |key, value| %>
           <tr>
@@ -9,17 +10,18 @@
           </tr>
         <% end %>
       </table>
-      <table>
+      <table class="table">
         <tr>
-          <td><div>Account: </div></td>
           <td><%= text_field_tag(:new_account_name) %></td>
-          <td><div>$</div></td>
           <td><%= text_field_tag(:new_account_balance) %></td>
+          <td><%= submit_tag "Add Account", class: "btn"  %></td>
         </tr>
-        <tr><td><%= submit_tag "Add Account", class: "btn"  %></td></tr>
       </table>
     </div>
-    <div class="span4">
+  </div>
+  <div class="row">
+    <div class="span8">
+      <h2>Categories</h2>
       <table id=category_balances class="table table-striped">
         <% @balances.each_pair do |key, value| %>
           <tr>
@@ -28,15 +30,13 @@
           </tr>
         <% end %>
       </table>
-      <table>
+      <table class="table">
         <tr>
-          <td><div>Category: </div></td>
           <td><%= text_field_tag(:new_category_name) %></td>
-          <td><div>$</div></td>
           <td><%= text_field_tag(:new_category_budget) %></td>
+          <td><%= submit_tag "Add Category", class: "btn"  %></td>
         </tr>
-        <tr><td><%= submit_tag "Add Category", class: "btn"  %></td></tr>
       </table>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
