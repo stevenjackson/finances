@@ -8,7 +8,6 @@ Feature:  No accounts and categories at start
     When I add a new "rent" category with $100 budget
     Then I should see $100 for "rent"
 
-  @guard
   Scenario:  Getting started link
     When I visit the site
     Then I should see a way to get started
