@@ -24,6 +24,26 @@ task :db_rollback, :target do |t, args|
   end
 end
 
+desc "Seed DEV database"
+task :db_seed do
+  require_relative 'environment_loader'
+  include EnvironmentLoader
+  load_env("development")
+  url = "sqlite://#{data_path FigNewton.sqlite.file}"
+  require 'sequel'
+  db = Sequel.connect(url)
+  FigNewton.load "seed.yml"
+
+  FigNewton.categories.to_hash.map(&:flatten).each do |category, amount|
+    db[:categories].insert :name => category, :budget => amount
+  end
+
+  FigNewton.accounts.to_hash.map(&:flatten).each do |account, balance|
+    db[:accounts].insert :name => account, :balance => balance
+  end
+
+end
+
 def db_dir
   find_path 'data'
 end
