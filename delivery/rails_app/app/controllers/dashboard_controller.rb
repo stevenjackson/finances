@@ -3,7 +3,6 @@ class DashboardController < ApplicationController
     @balances = GetCategoryBalances.new(gateway).run
     @accounts = GetAccountBalances.new(gateway).run
     @unsorted_transactions = GetUnsortedTransactionAccountSummary.new(gateway).run
-    @unsorted_transactions = { :checking => { count: 2, amount: 35  } }
   end
 
   def month
