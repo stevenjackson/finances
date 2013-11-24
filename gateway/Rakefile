@@ -1,5 +1,5 @@
 desc "Setup dev databases"
-task :db_bootstrap => %w[db_create db_migrate]
+task :db_bootstrap => %w[db_create db_migrate db_seed]
 
 task :db_create do
  %w[test development].each do |env|
