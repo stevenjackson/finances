@@ -1,5 +1,8 @@
 base_url: http://localhost:3000
 default_datasource: sqlite
+import_folder: dev_import
+import_folder_relative_path: gateway/data/dev_import
 
 sqlite:
   file: development.sqlite
+  relative_path: gateway/data/development.sqlite
