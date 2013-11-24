@@ -23,22 +23,6 @@ Feature: Show finances on a month basis
     Then I should see $1500 for deposits this month
     And I should see $100 for expenses this month
 
-  Scenario:  Navigate to previous month
-    Given I am viewing the May dashboard
-    Then I should be able to navigate to the previous April dashboard
-
-  Scenario:  Navigate to next month
-    Given I am viewing the May dashboard
-    Then I should be able to navigate to the next June dashboard
-
-  Scenario:  Navigate to previous year
-    Given I am viewing the January dashboard
-    Then I should be able to navigate to the previous December dashboard
-
-  Scenario:  Navigate to next year
-    Given I am viewing the December dashboard
-    Then I should be able to navigate to the next January dashboard
-
   Scenario:  Deposits default to next month
    Given I have a deposit for $300
    When I distribute the deposit

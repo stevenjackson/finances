@@ -9,7 +9,7 @@
         <% if @unsorted_transactions[key] %>
           <% text = "#{key} has #{@unsorted_transactions[key][:count]} unsorted transactions totaling $#{@unsorted_transactions[key][:amount]}" %>
           <tr>
-            <td colspan=2><div id=<%=key%>_unsorted><%=text%></div></td>
+            <td colspan=2><div id=<%=key%>_unsorted><%=link_to text, transaction_index_path %></div></td>
           </tr>
         <% end %>
       <% end %>
