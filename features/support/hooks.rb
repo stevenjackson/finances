@@ -42,7 +42,8 @@ AfterStep do
 end
 
 AfterStep do
-  return unless ENV['PAUSE']
-  print " (Step Done - Press Return to continue)".foreground :cyan
-  STDIN.getc
+  if ENV['PAUSE']
+    print " (Step Done - Press Return to continue)".foreground :cyan
+    STDIN.getc
+  end
 end
