@@ -27,4 +27,8 @@ module Finances::DateParams
       year
     end
   end
+
+  def short_date_for(date)
+    date.strftime "%b-%-d"
+  end
 end

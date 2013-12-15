@@ -39,6 +39,18 @@
     </div>
   </div>
   <div class="row">
+    <table id=expenses class="table table-striped">
+      <% @expenses.each do |expense| %>
+        <tr>
+          <td class='amount'><%= expense[:amount] %></td>
+          <td class='description'><%= expense[:description] %></td>
+          <td class='category'><%= expense[:category] %></td>
+          <td class='date'><%= expense[:date] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="row">
     <table id=totals class="table table-striped">
       <tr>
         <td>Deposits</td>

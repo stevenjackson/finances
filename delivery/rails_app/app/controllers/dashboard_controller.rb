@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
     @categories = GetCategoryBalanceSheet.new(gateway).run params
     @accounts = GetAccountBalanceSheet.new(gateway).run params
     @totals = GetBalanceSheetTotals.new(gateway).run params
+    @expenses = GetExpenseBalanceSheet.new(gateway).run params
     @month = Date.strptime("#{params[:year] || Date.today.year }-#{params[:month]}", '%Y-%B')
   end
 end
