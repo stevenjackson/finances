@@ -18,6 +18,10 @@ group :test do
   gem 'debugger'
 end
 
+group :development do
+  gem 'brakeman'
+end
+
 gem 'jquery-rails'
 
 gem 'finances', :path => '../../'

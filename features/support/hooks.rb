@@ -1,5 +1,6 @@
 require 'watir-webdriver'
-
+require 'rainbow'
+Sickill::Rainbow.enabled = true
 
 Before ('@guard') do
   @browser = browser('@guard')
@@ -34,4 +35,14 @@ at_exit do
   ensure
     $browser = nil
   end
+end
+
+AfterStep do
+  sleep ENV['SLOW'].to_f if ENV['SLOW'] != nil
+end
+
+AfterStep do
+  return unless ENV['PAUSE']
+  print " (Step Done - Press Return to continue)".foreground :cyan
+  STDIN.getc
 end

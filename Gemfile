@@ -3,6 +3,8 @@ gemspec
 
 group :test do
   gem "cucumber", "~> 1.3"
+  gem "slowhandcuke", "~> 0.0"
+  gem "rainbow", "~> 1.1"
   gem "rspec", "~> 2.14"
   gem "page-object", "~> 0.9"
   gem "database_cleaner", "~> 1.2"

@@ -1,3 +1,4 @@
 default: --no-source --color --format pretty
 guard: --no-source --color --format progress --tag @guard
 phantom: --no-source --color --format progress PHANTOM=true
+pause: --format 'Slowhandcuke::Formatter' PAUSE=true
