@@ -2,6 +2,12 @@ Given(/^I have a transaction for \$(\d+)$/) do |amount|
   @database.insert_transaction(amount)
 end
 
+Given(/^I have some expenses$/) do 
+  (Random.rand(1..10)).times do
+    @database.insert_transaction(Random.rand(2000))
+  end
+end
+
 Then(/^I should see (\d+) outstanding transactions?$/) do |count|
   visit(TransactionPage).count.should == count.to_i
 end

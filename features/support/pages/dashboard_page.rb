@@ -4,6 +4,8 @@ class DashboardPage
   page_url FigNewton.base_url
 
   link(:getting_started, :text => 'Getting Started')
+  link(:expenses, :text => 'Expenses')
+  link(:income, :text => 'Income')
 
   def balance(category)
     div_element(:id => "#{category}_balance").text

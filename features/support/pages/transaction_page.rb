@@ -13,7 +13,7 @@ class TransactionPage
     self.assign
   end
 
-  def count
+  def unsorted_count
     return transactions_element.rows
   end
 

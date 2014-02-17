@@ -2,6 +2,12 @@ Given(/^I have a deposit for \$(\d+)$/) do |amount|
   @database.insert_deposit(amount)
 end
 
+Given(/^I have some deposits$/) do 
+  (Random.rand(1..10)).times do
+    @database.insert_deposit(Random.rand(1..2000))
+  end
+end
+
 When(/^I distribute the deposit$/) do |table|
   table.rows.each do | category, amount |
     @database.insert_category(category, 0)

@@ -18,3 +18,11 @@ Feature: Navigation
   Scenario:  Navigate to unsorted transactions
     Given I have unsorted transactions for "checking"
     Then I can get to "checking" transactions from the dashboard
+
+  Scenario: Navigate to expenses
+    Given I have some expenses
+    Then I can get to the expenses view from the dashboard
+
+  Scenario: Navigate to income
+    Given I have some deposits
+    Then I can get to the income view from the dashboard
