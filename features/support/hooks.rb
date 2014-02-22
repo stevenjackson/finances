@@ -1,6 +1,6 @@
 require 'watir-webdriver'
 require 'rainbow'
-Sickill::Rainbow.enabled = true
+Rainbow.enabled = true
 
 Before ('@guard') do
   @browser = browser('@guard')

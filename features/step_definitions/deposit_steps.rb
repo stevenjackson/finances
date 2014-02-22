@@ -30,3 +30,8 @@ When (/^I delete the credits$/) do
   visit(DepositListPage).show_first
   on(DepositPage).delete_all
 end
+
+When (/^I apply the deposit to this month$/) do
+  on(DepositPage).apply_to_this_month
+  on(DepositPage).save
+end

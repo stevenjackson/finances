@@ -5,21 +5,27 @@
 <% end %>
 
 <h2>Distribute Your Deposit</h2>
+
 <div class="row">
-  <div class="span8">
-      <%= form_tag( {:action => "update"}, {:method => "put"}) do %>
-        <table id=split_transactions class="table table-striped">
-           <tr>
-             <td><h3><%= @deposit[:description] %></h3><td><h3>$<span id="transaction_amount"><%= @deposit[:amount] %></span></h3></td>
-            </tr>
-            <tr class='debit_row'/>
-              <% @credits.each do |credit| %>
-                <%= render partial: "transaction/debit_row", locals: {category: credit[:category], amount: credit[:amount]} %>
-            <% end %>
-            <tr>
-              <td>Remainder</td><td>$<span id="remainder"><%= @deposit[:amount] %></span></td>
-            </tr>
-        </table>
+  <%= form_tag( {:action => "update"}, {:method => "put"}) do %>
+    <div class="span2">Apply to</div>
+    <div class="span6">
+      <%= text_field_tag :applied_month, @applied_month %>
+      <%= text_field_tag :applied_year, @applied_year %>
+    </div>
+    <div class="span8">
+      <table id=split_transactions class="table table-striped">
+        <tr>
+          <th><%= @deposit[:description] %></th><th><h3>$<span id="transaction_amount"><%= @deposit[:amount] %></span></h3></th>
+        </tr>
+        <tr class='debit_row'/>
+        <% @credits.each do |credit| %>
+          <%= render partial: "transaction/debit_row", locals: {category: credit[:category], amount: credit[:amount]} %>
+        <% end %>
+        <tr>
+          <td>Remainder</td><td>$<span id="remainder"><%= @deposit[:amount] %></span></td>
+        </tr>
+      </table>
       <%= submit_tag "Save", name: 'split', class: "btn"  %>
       <%= button_tag "Cancel", type: 'button', class: "btn", onclick: "location.href = '#{transaction_index_path()}'" %>
     <% end %>

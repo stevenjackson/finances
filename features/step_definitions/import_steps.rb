@@ -4,5 +4,5 @@ Given /^there is a file to be imported$/ do
 end
 
 Then /^I will see transactions$/ do
-  visit(TransactionPage).count.should > 0
+  visit(TransactionPage).unsorted_count.should > 0
 end

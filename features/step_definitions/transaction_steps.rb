@@ -9,7 +9,7 @@ Given(/^I have some expenses$/) do
 end
 
 Then(/^I should see (\d+) outstanding transactions?$/) do |count|
-  visit(TransactionPage).count.should == count.to_i
+  visit(TransactionPage).unsorted_count.should == count.to_i
 end
 
 When(/^I assign the transaction to "(.*?)"$/) do |category|

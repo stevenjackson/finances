@@ -1,9 +1,17 @@
 class DepositPage
   include PageObject
+  include TimeHelper
 
   image(:add, :alt => 'Plus')
   image(:delete, :alt => 'Delete')
   button(:save, :text => "Save")
+  text_field(:month, :name => 'applied_month')
+  text_field(:year, :name => 'applied_year')
+
+  def apply_to_this_month
+    self.month = this_month_string
+    self.year = this_year
+  end
 
   def assign(category, amount)
     text_field_elements(:class => 'category').last.value=category
@@ -14,8 +22,6 @@ class DepositPage
   def amount_for(category)
     row_for(category).text_field_element(:class => 'amount').value
   end
-
-
 
   def delete_all
     while(delete?)

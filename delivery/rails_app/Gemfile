@@ -20,6 +20,7 @@ end
 
 group :development do
   gem 'brakeman'
+  gem 'pry'
 end
 
 gem 'jquery-rails'
