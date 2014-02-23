@@ -4,7 +4,7 @@ class Finances::GetUnsortedTransactionAccountSummary
   end
 
   def run
-    unsorted_transactions = GetUnsortedTransactions.new(@gateway).unsorted_transactions
+    unsorted_transactions = GetUnsortedExpenses.new(@gateway).unsorted_transactions
     @gateway.accounts.each_with_object({}) do |account, hash|
        hash[account.name.to_sym] = summarize(account, unsorted_transactions) 
     end.reject do |account, summary|

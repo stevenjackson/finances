@@ -21,3 +21,7 @@ Feature:  Distribute transactions amongst categories
       | gas      | 15     |
     Then I should see $80 for "groc"
     And I should see $0 for "gas"
+
+  Scenario:  Deposits don't show up in transactions view
+    Given I have a deposit for $300
+    Then I should see 0 outstanding transactions

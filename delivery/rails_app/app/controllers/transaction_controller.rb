@@ -1,6 +1,6 @@
 class TransactionController < ApplicationController
   def index
-    @unsorted_transactions = GetUnsortedTransactions.new(gateway).run
+    @unsorted_transactions = GetUnsortedExpenses.new(gateway).run
   end
 
   def assign

@@ -1,4 +1,4 @@
-class Finances::GetUnsortedTransactions
+class Finances::GetUnsortedIncome
   def initialize(gateway)
     @gateway = gateway
   end
@@ -8,8 +8,8 @@ class Finances::GetUnsortedTransactions
   end
 
   def unsorted_transactions
-    sorted_transaction_ids = @gateway.debits.map(&:transaction_id)
-    unsorted_transactions = @gateway.transactions.reject do |t|
+    sorted_transaction_ids = @gateway.credits.map(&:transaction_id)
+    @gateway.transactions.select(&:credit?).reject do |t|
       sorted_transaction_ids.include? t.id
     end
   end
