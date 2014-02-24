@@ -8,7 +8,7 @@
       <% end %>
     </table>
   </div>
-  <div class="span5">
+  <div class="span5 sidebar-fixed">
     <%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
       <%= text_field_tag(:category) %>
       <%= hidden_field_tag :transaction_id %>

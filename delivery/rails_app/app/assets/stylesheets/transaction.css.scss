@@ -1,15 +1,18 @@
-table
-{
+table {
   border-spacing:0;
 }
 
-tr.selected td
-{
+tr.selected td {
   background-color: #3399ff;
   color:#fff;
 }
 
-input.btn-top
-{
+input.btn-top {
   vertical-align:top;
+}
+
+.sidebar-fixed {
+  position: fixed;
+  top: 65px;
+  margin-left: 350px;
 }

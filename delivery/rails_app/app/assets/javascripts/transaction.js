@@ -1,10 +1,19 @@
 $(document).ready(function() {
     $("#unsorted_transactions tr").click(function(){
-        transaction.select($(this));
+      transaction.select($(this));
     });
 
     $("body").keydown(function(e){
-        transaction.handleKey(e.keyCode);
+      transaction.handleKey(e.keyCode);
+    });
+
+    var stickyOffset = $('.sticky').offset();
+    $(window).scroll(function() {
+      if (stickyOffset.top < $(window).scrollTop()) {
+       $('.sticky').addClass('fixed');
+      } else {
+       $('.sticky').removeClass('fixed');
+      }
     });
 });
 
@@ -18,13 +27,18 @@ $(document).ready(function() {
     };
     transaction.handleKey = function(keyCode) {
         row = transaction.selectedRow();
-        console.log(keyCode + "," +  row);
         switch(keyCode) {
             case 40: //down arrow
               transaction.select(transaction.nextRow(row));
             break;
             case 38: //up arrow
               transaction.select(transaction.prevRow(row));
+            break;
+            case 39: //right arrow
+              $("#category").focus();
+            break;
+            case 37: //left arrow
+              $("#category").blur();
             break;
             case 13: //enter
               $("input[value='Assign']").click();
