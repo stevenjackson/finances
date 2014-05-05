@@ -13,7 +13,7 @@ class TransactionController < ApplicationController
   end
 
   def split
-    @transaction = index.find { |t| t[:id].to_s == params[:id]  }
+    @transaction = GetTransaction.new(gateway).run(params)
   end
 
   def save_splits

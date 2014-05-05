@@ -19,7 +19,7 @@ class TestDatabase
   end
 
   def insert_transaction(amount)
-    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :posted_at => Time.now
+    @db[:transactions].insert :description => "Trans", :amount => "-#{amount}", :posted_at => Time.now, :account_id => first_account[:id]
   end
 
   def insert_deposit(amount)
@@ -38,5 +38,12 @@ class TestDatabase
   def store_balance(account, amount, date)
     account_id = @db[:accounts][:name => account][:id]
     @db[:account_balances].insert :account_id => account_id, :balance => amount, :date => date
+  end
+
+  def first_account
+    unless @db[:accounts].first
+      acct = insert_account('test')
+    end
+    @db[:accounts].first
   end
 end

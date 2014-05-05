@@ -1,10 +1,13 @@
 <div class="row">
   <div class="span4">
     <table id=unsorted_transactions class="table table-bordered">
-      <% @unsorted_transactions.each do |t| %>
-        <tr id=t<%= t[:id] %> class='transaction_row'>
-          <td> <%=t[:description] %></td><td class='amount'> <%=t[:amount] %> </td>
-        </tr>
+      <% @unsorted_transactions.each_pair do |account, account_transactions| %>
+        <tr><th><%= account[:name] %></th></tr>
+        <% account_transactions.each do |t| %>
+          <tr id=t<%= t[:id] %> class='transaction_row'>
+            <td> <%=t[:description] %></td><td class='amount'> <%=t[:amount] %> </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>

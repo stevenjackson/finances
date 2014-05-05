@@ -1,10 +1,12 @@
 class Finances::GetUnsortedExpenses
+  include Finances::GroupByAccount
+
   def initialize(gateway)
     @gateway = gateway
   end
 
   def run
-    unsorted_transactions.map(&:to_h)
+    group_by_account unsorted_transactions
   end
 
   def unsorted_transactions
