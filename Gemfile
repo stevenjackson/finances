@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-gemspec 
+gemspec
 
 group :test do
   gem "cucumber", "~> 1.3"
