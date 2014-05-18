@@ -9,6 +9,7 @@ RailsApp::Application.routes.draw do
     end
   end
   resources :deposit
+  resources :category, format: :json, only: [:index]
   get '/admin' => 'admin#index'
   post '/admin' => 'admin#save'
 

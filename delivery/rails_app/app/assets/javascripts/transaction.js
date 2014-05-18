@@ -9,22 +9,52 @@ $(document).ready(function() {
 
     var stickyOffset = $('.sticky').offset();
     $(window).scroll(function() {
+      if (!stickyOffset) return;
+
       if (stickyOffset.top < $(window).scrollTop()) {
        $('.sticky').addClass('fixed');
       } else {
        $('.sticky').removeClass('fixed');
       }
     });
+
+    categoryAutocomplete.bind($('#category'));
 });
 
 (function( transaction, $, undefined ) {
     transaction.select = function($row) {
         $("#unsorted_transactions tr").removeClass("selected");
         $row.toggleClass("selected");
-
-        $("#transaction_id").val($row[0].id.match(/\d+/)[0]);
-        $("#amount").val($row.children(".amount").text().match(/\d+/)[0]);
+        this.updateTransactionData($row);
+        this.scrollIfNeeded($row);
     };
+
+    transaction.scrollIfNeeded = function($row) {
+      if(this.inView($row[0])) return;
+
+      scrollTo(0, $row.position().top - $row.height());
+    };
+
+    transaction.inView = function(elem) {
+      var windowTop = $(window).scrollTop();
+      var windowBottom = windowTop + $(window).height();
+      var elemTop = $(elem).offset().top;
+      var onPage = elemTop >= windowTop;
+      var aboveFold = elemTop <= windowBottom;
+      return onPage && aboveFold;
+    };
+
+    transaction.updateTransactionData = function($row) {
+      var $rowId = $row[0].id.match(/\d+/);
+      var $rowAmount = $row.children(".amount").text().match(/\d+/);
+      if($rowId) {
+        $("#transaction_id").val($rowId[0]);
+      }
+      if($rowAmount) {
+        $("#amount").val($rowAmount[0]);
+      }
+    };
+
     transaction.handleKey = function(keyCode) {
         row = transaction.selectedRow();
         switch(keyCode) {
@@ -45,6 +75,12 @@ $(document).ready(function() {
             break;
             case 191: // slash
               $("input[value='Split']").click();
+            break;
+            default:
+              //alphanumeric
+              if(keyCode >= 48 && keyCode <= 90) {
+                $("#category").focus();
+              }
             break;
         }
     };
@@ -84,7 +120,7 @@ $(document).ready(function() {
     }
 
     transaction.selectedRow = function() { 
-        return transaction.findOne("#unsorted_transactions tr.selected");
+        return this.findOne("#unsorted_transactions tr.selected");
     }
 
     transaction.findOne = function(selector) {
@@ -96,3 +132,34 @@ $(document).ready(function() {
         }
     }
 }( window.transaction = window.transaction || {}, jQuery ));
+
+(function( categoryAutocomplete, $, undefined ) {
+  categoryAutocomplete.data = function() {
+    var data = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      limit: 10,
+      prefetch: {
+        url: 'category'
+      }
+    });
+    data.initialize();
+    return data;
+  };
+
+  categoryAutocomplete.bind = function($elem) {
+    $elem.typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'categories',
+      displayKey: 'name',
+      source: this.data().ttAdapter(),
+      templates: {
+        suggestion: Handlebars.compile('<p>{{name}}  ${{amount}}</p>')
+      }
+    });
+  }
+}( window.categoryAutocomplete = window.categoryAutocomplete || {}, jQuery ));

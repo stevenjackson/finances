@@ -13,7 +13,7 @@
   </div>
   <div class="span5 sidebar-fixed">
     <%= form_tag( {:action => "assign"}, {:method => "put"}) do %>
-      <%= text_field_tag(:category) %>
+      <%= text_field_tag :category, nil, class: 'typeahead' %>
       <%= hidden_field_tag :transaction_id %>
       <%= hidden_field_tag :amount %>
       <%= submit_tag "Assign", name: 'assign', class: "btn btn-top"  %>
